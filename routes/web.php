@@ -14,5 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
+Route::get('/login', function () {
+    return view('login.login');
+});
+
+Route::resource("users", "UserController");
+
+Auth::routes();
+
+Route::match(["GET", "POST"], "/register", function () {
+    return redirect("/login");
+})->name("register");
+
+Route::get('/home', 'HomeController@index')->name('home');
