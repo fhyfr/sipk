@@ -13,7 +13,7 @@
 <!-- Content Start -->
 <div class="content-wrapper non-dashboard">
   <div class="heading">
-    <a href="data-user.html">
+    <a href="{{url('users')}}">
       <h1><i class="fas fa-chevron-left"></i> Kembali</h1>
     </a>
   </div>

@@ -100,19 +100,14 @@ class UserController extends Controller
 
         $user->name = $request->get('name');
         $user->roles = json_encode($request->get('roles'));
-        $user->address = $request->get('address');
-        $user->phone = $request->get('phone');
-        $user->status = $request->get('status');
+        $user->email = $request->get('email');
+        $user->username = $request->get('username');
+        $user->password = $request->get('password');
+        $user->roles = strtolower($request->get('roles'));
 
-        if ($request->file('avatar')) {
-            if ($user->avatar && file_exists(storage_path('app/public/' . $user->avatar))) {
-                \Storage::delete('public/' . $user->avatar);
-            }
-            $file = $request->file('avatar')->store('avatars', 'public');
-            $user->avatar = $file;
-        }
+        $user->save();
 
-        return redirect()->route('users.edit', [$id])->with('status', 'User berhasil diupdated');
+        return redirect()->route('users.index', [$id])->with('status', 'User berhasil diupdated');
     }
 
     /**

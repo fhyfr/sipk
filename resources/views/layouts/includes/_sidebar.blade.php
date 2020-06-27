@@ -6,7 +6,7 @@
       <li class="sidebar-header">MENU UTAMA</li>
       <li><a class="sidebar-item {{ (request()->is('home')) ? 'active' : '' }}" href="{{url('/home')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
       <li><a class="sidebar-item" href="karyawan.html"><i class="fas fa-folder-open"></i> Karyawan</a></li>
-      <li><a class="sidebar-item {{ (request()->is('users')) || (request()->is('detailBahanBaku')) ? 'active' : '' }}" href="{{url('/users')}}"><i class="fas fa-users" aria-hidden="true"></i> Data Pengguna</a></li>
+      <li><a class="sidebar-item {{ (request()->is('users')) || (request()->is('users/create')) || (request()->is('users/{$user->id}/edit')) ? 'active' : '' }}" href="{{url('/users')}}"><i class="fas fa-users" aria-hidden="true"></i> Data Pengguna</a></li>
       <li><a class="sidebar-item" href="absensi.html"><i class="fas fa-user-clock"></i> Absensi</a></li>
       <li><a class="sidebar-item" href="gajian.html"><i class="fas fa-trophy" aria-hidden="true"></i> Gajian</a></li>
       <li><a class="sidebar-item" href="laporan.html"><i class="fas fa-chart-pie"></i> Laporan</a></li>

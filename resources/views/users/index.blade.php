@@ -7,6 +7,11 @@
 <div class="content-wrapper non-dashboard">
   <div class="heading">
     <h1>Semua Pengguna</h1>
+    @if(session('status'))
+    <div class="alert alert-success">
+      {{session('status')}}
+    </div>
+    @endif
     <div class="action">
       <a href="{{route('users.create')}}" class="btn btn-action"><i class="fas fa-plus-circle"></i> Tambah Data</a>
       <a href=""><i class="fas fa-trash-alt"></i></a>
@@ -63,7 +68,9 @@
           ?>
           <tr>
             <th class="center" scope="row">{{$i}}</th>
-            <td class="center"></a><input type="checkbox" aria-label="Checkbox for following text input"></td>
+            <form action="" method="get">
+              <td class="center"></a><input type="checkbox" ``aria-label="Checkbox for following text input"></td>
+            </form>
             <td class="center"><a href="{{route('users.edit', [$user->id] )}}"><i class="fas fa-pen-square"></i></a></td>
             <td class="center">{{$user->name}}</td>
             <td class="center">{{$user->email}}</td>
