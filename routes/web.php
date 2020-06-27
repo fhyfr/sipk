@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::resource("users", "UserController");
+Route::get('/home', 'HomeController@index')->name('home');
 
 // routes untuk Auth (Login, register, lupa password)
 Auth::routes();
@@ -28,4 +28,9 @@ Route::match(["GET", "POST"], "/register", function () {
 })->name("register");
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Routes menu data pengguna 
+Route::resource("users", "UserController");
+Route::delete('usersDeleteAll', 'UserController@deleteAll');
+
+//Routes menu data karyawan
+Route::resource("karyawans", "KaryawanController");

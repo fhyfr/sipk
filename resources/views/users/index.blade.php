@@ -1,6 +1,6 @@
 @extends("layouts.global")
 
-@section("title") Users list @endsection
+@section("title") Data Pengguna @endsection
 
 @section("content")
 <!-- Content Start -->
@@ -12,9 +12,10 @@
       {{session('status')}}
     </div>
     @endif
+
     <div class="action">
       <a href="{{route('users.create')}}" class="btn btn-action"><i class="fas fa-plus-circle"></i> Tambah Data</a>
-      <a href=""><i class="fas fa-trash-alt"></i></a>
+      <a class="btn delete_all" data-url="{{ url('usersDeleteAll') }}"> <i class="fas fa-trash-alt"></i></a>
     </div>
   </div>
   <div class="data-content">
@@ -34,7 +35,6 @@
       <div class="search">
         <form action="{{route('users.index')}}">
           <div class="form-group row">
-            <!-- <label for="searchData" class="col-3 col-form-label px-0 align-self-end">Cari Data</label> -->
             <div class="col-8">
               <input type="text" name="keyword" class="form-control" id="searchData" placeholder="masukkan kata kunci">
             </div>
@@ -49,7 +49,7 @@
         <thead>
           <tr>
             <th scope="col">No</th>
-            <th scope="col"><input type="checkbox" aria-label="Checkbox for following text input"></th>
+            <th scope="col"><input type="checkbox" id="master"></th>
             <th scope="col"><i class="fas fa-pen-square"></i></th>
             <th scope="col">Nama Pengguna</th>
             <th scope="col">Email</th>
@@ -68,10 +68,8 @@
           ?>
           <tr>
             <th class="center" scope="row">{{$i}}</th>
-            <form action="" method="get">
-              <td class="center"></a><input type="checkbox" ``aria-label="Checkbox for following text input"></td>
-            </form>
-            <td class="center"><a href="{{route('users.edit', [$user->id] )}}"><i class="fas fa-pen-square"></i></a></td>
+            <td class="center"></a><input type="checkbox" class="sub_chk" data-id="{{$user->id}}"></td>
+            <td class=" center"><a href="{{route('users.edit', [$user->id] )}}"><i class="fas fa-pen-square"></i></a></td>
             <td class="center">{{$user->name}}</td>
             <td class="center">{{$user->email}}</td>
             <td class="center">{{$user->username}}</td>

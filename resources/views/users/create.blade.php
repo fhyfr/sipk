@@ -1,6 +1,6 @@
 @extends("layouts.global")
 
-@section("title") Create User @endsection
+@section("title") Tambah Data Pengguna @endsection
 
 @section("content")
 
@@ -25,7 +25,7 @@
     <form class="add-data" action="{{route('users.store')}}" method="post">
       @csrf
       <div class="form-row">
-        <div class="col p-2">
+        <div class="col-md-6 p-2">
           <div class="form-group">
             <label for="nomorPengguna" class="col-form-label px-0 align-self-end">Nama Lengkap <strong>*</strong></label>
             <input type="text" name="name" class="form-control" id="namaPengguna" placeholder="masukkan nama lengkap" required autofocus>
@@ -39,7 +39,7 @@
             <input type="text" name="username" class="form-control" id="userName" placeholder="masukkan username" required>
           </div>
         </div>
-        <div class="col p-2">
+        <div class="col-md-6 p-2">
           <div class="form-group">
             <label for="password" class="col-form-label px-0 align-self-end">Password <strong>*</strong></label>
             <input type="password" name="password" class="form-control" id="nomorHandphone" placeholder="masukkan password pengguna" required>

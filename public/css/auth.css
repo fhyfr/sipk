@@ -1,11 +1,16 @@
 body {
-    font-family: 'Raleway', sans-serif;
+    font-family: "Raleway", sans-serif;
     padding: 0;
     margin: 0;
-    background-image: linear-gradient(to bottom, rgba(163, 86, 255, 0.52), rgba(115, 67, 254, 0.73)), url(../img/bg-login.jpg);
+    background-image: linear-gradient(
+            to bottom,
+            rgba(163, 86, 255, 0.52),
+            rgba(115, 67, 254, 0.73)
+        ),
+        url(../img/bg-login.jpg);
     background-size: cover;
     background-position: center center;
-    color: #45046A;
+    color: #45046a;
     height: 100vh;
     width: 100%;
     box-sizing: border-box;
@@ -14,7 +19,7 @@ body {
     align-items: center;
 }
 .wrapper-login {
-    background-color: rgba(255, 255, 255, .7);
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 35px;
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -39,17 +44,17 @@ body {
 }
 .wrapper-login form {
     text-align: center;
-    color: #45046A;
+    color: #45046a;
 }
 .wrapper-login form .form-group {
     position: relative;
 }
 .wrapper-login form .form-group input {
-    color: #45046A;
+    color: #45046a;
     font-size: 14px;
     box-shadow: none;
     outline: none;
-    border: 2px solid #45046A;
+    border: 2px solid #45046a;
     height: 50px;
     background-color: rgba(255, 255, 255, 0);
     padding: 5px 50px 5px 15px;
@@ -57,7 +62,7 @@ body {
 .wrapper-login form .form-group input:focus {
     box-shadow: none;
     outline: none;
-    border: 2px solid #45046A;
+    border: 2px solid #45046a;
     height: 50px;
 }
 .wrapper-login form .form-group .fa {
@@ -68,7 +73,7 @@ body {
     width: 15px;
 }
 .wrapper-login form button {
-    background-color: #45046A;
+    background-color: #45046a;
     width: 150px;
     height: 50px;
     border-radius: 50px;
@@ -76,7 +81,7 @@ body {
     -moz-border-radius: 50px;
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
-    color: #E2D3FC;
+    color: #e2d3fc;
     font-size: 18px;
     transition: all 1s;
     -webkit-transition: all 1s;
@@ -87,13 +92,13 @@ body {
 .wrapper-login form button:hover {
     color: #fff;
 }
-@media (min-width: 992px) { 
+@media (min-width: 992px) {
     .wrapper-login {
         width: 400px;
         height: 350px;
     }
 }
-@media (max-width: 575.98px) { 
+@media (max-width: 575.98px) {
     .wrapper-login {
         width: 300px;
         height: 400px;

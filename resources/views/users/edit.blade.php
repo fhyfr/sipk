@@ -29,7 +29,7 @@
         <!-- Input berupa hidden untuk mengganti method menjadi PUT -->
         <input type="hidden" value="PUT" name="_method">
 
-        <div class="col p-2">
+        <div class="col-md-6 p-2">
           <div class="form-group">
             <label for="nomorPengguna" class="col-form-label px-0 align-self-end">Nama Lengkap <strong>*</strong></label>
             <input type="text" value="{{$user->name}}" name="name" class="form-control" id="namaPengguna" placeholder="masukkan nama lengkap">
@@ -44,16 +44,16 @@
           </div>
 
         </div>
-        <div class="col p-2">
+        <div class="col-md-6 p-2">
           <div class="form-group">
             <label for="password" class="col-form-label px-0 align-self-end">Password <strong>*</strong></label>
             <input type="password" value="{{$user->password}}" name="password" class="form-control" id="nomorHandphone" placeholder="masukkan password pengguna">
           </div>
           <div class="form-group">
             <label for="userLevel" class="col-form-label px-0 align-self-end">User Level <strong>*</strong></label>
-            <select style="font-size: 12px;" id="userLevel" class="form-control" value="{{$user->roles}}" name="roles">
-              <option>Admin</option>
-              <option>Karyawan</option>
+            <select style="font-size: 12px;" id="userLevel" class="form-control" name="roles">
+              <option {{ ($user->roles == 'admin') ? 'selected' : '' }}>Admin</option>
+              <option {{ ($user->roles == 'karyawan') ? 'selected' : '' }}>Karyawan</option>
             </select>
           </div>
           <div class="form-group form-group-button">

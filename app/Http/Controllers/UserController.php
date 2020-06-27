@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -22,7 +25,7 @@ class UserController extends Controller
 
         if ($filterKeyword) {
 
-            $users = \App\User::where('email', 'LIKE', "%$filterKeyword%")->orWhere('name', 'like', "%filterKeyword%")->orWhere('username', 'like', "%filterKeyword%")->paginate(20);
+            $users = \App\User::where('name', 'like', "%$filterKeyword%")->orWhere('email', 'like', "%$filterKeyword%")->orWhere('username', 'like', "%$filterKeyword%")->orWhere('roles', 'like', "%$filterKeyword%")->paginate(20);
         }
         return view('users.index', ['users' => $users]);
     }
@@ -52,7 +55,7 @@ class UserController extends Controller
         $new_user->username = $request->get('username');
         $new_user->roles = strtolower($request->get('roles'));
         $new_user->email = $request->get('email');
-        $new_user->password = \Hash::make($request->get('password'));
+        $new_user->password = Hash::make($request->get('password'));
 
         $new_user->save();
 
@@ -102,7 +105,18 @@ class UserController extends Controller
         $user->roles = json_encode($request->get('roles'));
         $user->email = $request->get('email');
         $user->username = $request->get('username');
-        $user->password = $request->get('password');
+
+        // Cek apakah password berubah atau tidak, jika iya maka hash password baru
+        if (Hash::needsRehash($user->password)) {
+            $user->password = Hash::make($request->password);
+        } else {
+            if ($user->password != ($user->password = $request->get('password'))) {
+                $user->password = Hash::make($request->password);
+            }
+        }
+
+        // $user->password = $request->get('password');
+
         $user->roles = strtolower($request->get('roles'));
 
         $user->save();
@@ -122,6 +136,13 @@ class UserController extends Controller
         $user = \App\User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('users.index')->with('status', 'User successfully deleted');
+        return redirect()->route('users.index')->with('status', 'User berhasil dihapus');
+    }
+
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        \DB::table("users")->whereIn('id', explode(",", $ids))->delete();
+        return response()->json(['success' => "Users Deleted successfully."]);
     }
 }
