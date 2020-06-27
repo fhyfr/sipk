@@ -17,16 +17,15 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/login', function () {
-    return view('login.login');
-});
-
 Route::resource("users", "UserController");
 
+// routes untuk Auth (Login, register, lupa password)
 Auth::routes();
 
+// Hindari User agar tidak bisa masuk ke fitur registrasi
 Route::match(["GET", "POST"], "/register", function () {
     return redirect("/login");
 })->name("register");
+
 
 Route::get('/home', 'HomeController@index')->name('home');

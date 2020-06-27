@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Larashop @yield("title")</title>
+    <title> @yield("title")</title>
     <link rel="stylesheet" href="{{asset('polished/polished.min.css')}}">
     <link rel="stylesheet" href="{{asset('polished/iconic/css/open-iconicbootstrap.min.css')}}">
     <style>
@@ -37,12 +37,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand p-0">
-        <a class="navbar-brand text-center col-xs-12 col-md-3 col-lg-2 mr-0" href="index.html"> Larashop </a>
-        <button class="btn btn-link d-block d-md-none" datatoggle="collapse" data-target="#sidebar-nav" role="button">
-            <span class="oi oi-menu"></span>
-        </button>
-    </nav>
+
     <div class="container-fluid h-100 p-0">
         <div style="min-height: 100%" class="flex-row d-flex align-itemsstretch m-0">
             <div class="col-lg-12 col-md-12 p-4">
