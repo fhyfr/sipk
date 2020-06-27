@@ -5,40 +5,50 @@
 <!--<![endif]-->
 
 <head>
+  <!-- Required meta tags -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>SIPK - @yield("title")</title>
-  <link rel="stylesheet" href="{{asset('polished/polished.min.css')}}">
-  <!-- <link rel="stylesheet" href="{{asset('polished/iconic/css/open-iconicbootstrap.min.css')}}"> -->
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{asset('css/dashboard.css')}}">
+
+  <!-- Font Awesome -->
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <style>
-    .grid-highlight {
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-      background-color: #5c6ac4;
-      border: 1px solid #202e78;
-      color: #fff;
-    }
 
-    hr {
-      margin: 6rem 0;
-    }
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;500;600;700;900&display=swap" rel="stylesheet">
 
-    hr+.display-3,
-    hr+.display-2+.display-3 {
-      margin-bottom: 2rem;
-    }
-  </style>
-  <script type="text/javascript">
-    document.documentElement.className =
-      document.documentElement.className.replace('no-js', 'js') +
-      (document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure ", "1.1 ") ? ' svg' : ' no-svg');
-  </script>
+  <title>SIPK - @yield("title")</title>
+
 </head>
 
 <body>
-  <nav class="navbar navbar-expand p-0">
+  <div id="app">
+    <div class="main-wrapper">
+      @include('layouts.includes._navbar')
+
+      @include('layouts.includes._sidebar')
+
+      @yield('content')
+
+    </div>
+  </div>
+
+  <!-- Optional JavaScript Start-->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script src="https://use.fontawesome.com/releases/v5.13.1/js/all.js" data-auto-replace-svg="nest"></script>
+  <!-- Optional Javascript End -->
+
+
+  <!-- <nav class="navbar navbar-expand p-0">
     <a class="navbar-brand text-center col-xs-12 col-md-3 col-lg-2 mr0" href="{{route('home')}}"> PT. Gajian </a>
     <button class="btn btn-link d-block d-md-none" datatoggle="collapse" data-target="#sidebar-nav" role="button">
       <span class="fa fa-bars"></span>
@@ -62,21 +72,21 @@
         </li>
       </div>
     </div>
-  </nav>
+  </nav> -->
 
-  <div class="container-fluid h-100 p-0">
+  <!-- <div class="container-fluid h-100 p-0">
     <div style="min-height: 100%" class="flex-row d-flex align-itemsstretch m-0">
       <div class="polished-sidebar bg-light col-12 col-md-3 col-lg-2 p-0 collapse d-md-inline" id="sidebar-nav">
         <ul class="polished-sidebar-menu ml-0 pt-4 p-0 d-md-block">
           <input class="border-dark form-control d-block d-md-none mb-4" type="text" placeholder="Search" aria-label="Search" />
           <!-- Sidebar -->
-          <li class="{{ (request()->is('home')) ? 'active' : '' }}"><a class="nav-link" href="{{url('/home')}}"> <span class="fa fa-home"></span> Dashboard</a></li>
+  <!-- <li class="{{ (request()->is('home')) ? 'active' : '' }}"><a class="nav-link" href="{{url('/home')}}"> <span class="fa fa-home"></span> Dashboard</a></li>
 
-          <li class="{{ (request()->is('users')) ? 'active' : '' }}"><a class="nav-link" href="{{url('/users')}}"> <span class="fa fa-users"></span> Data User</a></li>
+          <li class="{{ (request()->is('users')) ? 'active' : '' }}"><a class="nav-link" href="{{url('/users')}}"> <span class="fa fa-users"></span> Data User</a></li> -->
 
-          <!-- Endof Sidebar -->
+  <!-- Endof Sidebar -->
 
-          <div class="d-block d-md-none">
+  <!-- <div class="d-block d-md-none">
             <div class="dropdown-divider"></div>
             <li><a href="#"> Profile</a></li>
             <li><a href="#"> Setting</a></li>
@@ -101,14 +111,14 @@
             </div>
           </div>
         </div>
-        @yield("content")
+        
       </div>
-    </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+    </div> -->
+  <!-- </div> -->
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script> -->
 </body>
 
 </html>

@@ -16,18 +16,14 @@ class UserController extends Controller
         // Menampilkan data user
         $users = \App\User::paginate(5);
 
-        // Fitur Filter
+        // Fitur Filter berdasarkan email, nama, dan username
+
         $filterKeyword = $request->get('keyword');
-        $status = $request->get('status');
 
         if ($filterKeyword) {
-            if ($status) {
-                $users = \App\User::where('email', 'LIKE', "%$filterKeyword%")->where('status', $status)->paginate(10);
-            } else {
-                $users = \App\User::where('email', 'LIKE', "%$filterKeyword%")->paginate(10);
-            }
-        }
 
+            $users = \App\User::where('email', 'LIKE', "%$filterKeyword%")->orWhere('name', 'like', "%filterKeyword%")->orWhere('username', 'like', "%filterKeyword%")->paginate(20);
+        }
         return view('users.index', ['users' => $users]);
     }
 
