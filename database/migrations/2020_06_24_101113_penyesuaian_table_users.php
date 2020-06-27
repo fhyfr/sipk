@@ -16,10 +16,6 @@ class PenyesuaianTableUsers extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string("username")->unique();
             $table->string("roles");
-            $table->text("address");
-            $table->string("phone");
-            $table->string("avatar");
-            $table->enum("status", ["ACTIVE", "INACTIVE"]);
         });
     }
 
@@ -30,13 +26,9 @@ class PenyesuaianTableUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function(Blueprint $table){
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn("username");
             $table->dropColumn("roles");
-            $table->dropColumn("address");
-            $table->dropColumn("phone");
-            $table->dropColumn("avatar");
-            $table->dropColumn("status");
         });
     }
 }

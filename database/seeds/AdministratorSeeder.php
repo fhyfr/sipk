@@ -12,21 +12,14 @@ class AdministratorSeeder extends Seeder
      */
     public function run()
     {
+        $administrator = new \App\User;
+        $administrator->name = "Jack Ma";
+        $administrator->email = "jack@gmail.com";
+        $administrator->username = "jack";
+        $administrator->password = \Hash::make("123456");
+        $administrator->roles = "karyawan";
 
-        for ($i = 0; $i < 10; $i++) {
-            $administrator = new \App\User;
-            $administrator->username = "admin{$i}";
-            $administrator->name = "Administrator{$i}";
-            $administrator->email = "admin{$i}@gmail.com";
-            $administrator->roles = json_encode(["ADMIN"]);
-            $administrator->password = \Hash::make("123456");
-            $administrator->avatar = "foto-profil{$i}.png";
-            $administrator->address = "{$i}, Tangerang Selatan";
-            $administrator->phone = "08138550554{$i}";
-
-            $administrator->save();
-        }
-
+        $administrator->save();
 
         $this->command->info("User berhasil diseed ke DB");
     }

@@ -10,59 +10,56 @@
 </div>
 @endif
 
-<form action="{{route('users.store')}}" method="post" enctype="multipart/form-data" class="bg-white shadow-sm p-3">
-  @csrf
+<!-- Content Start -->
+<div class="content-wrapper non-dashboard">
+  <div class="heading">
+    <a href="data-user.html">
+      <h1><i class="fas fa-chevron-left"></i> Kembali</h1>
+    </a>
+  </div>
+  <div class="data-content">
+    <div class="content-header">
+      <h2>Tambah Data Pengguna</h2>
+    </div>
 
-  <label for="name">Name</label>
-  <input class="form-control" placeholder="Full Name" type="text" name="name" id="name" />
-  <br>
-
-  <label for="username">Username</label>
-  <input class="form-control" placeholder="username" type="text" name="username" id="username" />
-  <br>
-
-  <label for="">Roles</label>
-  <br>
-  <input type="checkbox" name="roles[]" id="ADMIN" value="ADMIN">
-
-  <label for="ADMIN">Administrator</label>
-  <input type="checkbox" name="roles[]" id="STAFF" value="STAFF">
-
-  <label for="STAFF">Staff</label>
-  <input type="checkbox" name="roles[]" id="CUSTOMER" value="CUSTOMER">
-
-  <label for="CUSTOMER">Customer</label>
-  <br>
-  <br>
-
-  <label for="phone">Phone number</label>
-  <br>
-  <input type="text" name="phone" class="form-control">
-  <br>
-
-  <label for="address">Address</label>
-  <textarea name="address" id="address" class="form-control"></textarea>
-  <br>
-
-  <label for="avatar">Avatar image</label>
-  <br>
-  <input id="avatar" name="avatar" type="file" class="form-control">
-  <hr class="my-3">
-
-  <label for="email">Email</label>
-  <input class="form-control" placeholder="user@mail.com" type="text" name="email" id="email" />
-  <br>
-
-  <label for="password">Password</label>
-  <input class="form-control" placeholder="password" type="password" name="password" id="password" />
-  <br>
-
-  <label for="password_confirmation">Password Confirmation</label>
-  <input class="form-control" placeholder="password confirmation" type="password" name="password_confirmation" id="password_confirmation" />
-  <br>
-
-  <input class="btn btn-primary" type="submit" value="Save" />
-</form>
+    <form class="add-data" action="{{route('users.store')}}" method="post">
+      @csrf
+      <div class="form-row">
+        <div class="col p-2">
+          <div class="form-group">
+            <label for="nomorPengguna" class="col-form-label px-0 align-self-end">Nama Lengkap <strong>*</strong></label>
+            <input type="text" name="name" class="form-control" id="namaPengguna" placeholder="masukkan nama lengkap" required autofocus>
+          </div>
+          <div class="form-group">
+            <label for="emailPengguna" class="col-form-label px-0 align-self-end">Email <strong>*</strong></label>
+            <input type="email" name="email" class="form-control" id="emailPengguna" placeholder="masukkan email" required>
+          </div>
+          <div class="form-group">
+            <label for="userName" class="col-form-label px-0 align-self-end">Username <strong>*</strong></label>
+            <input type="text" name="username" class="form-control" id="userName" placeholder="masukkan username" required>
+          </div>
+        </div>
+        <div class="col p-2">
+          <div class="form-group">
+            <label for="password" class="col-form-label px-0 align-self-end">Password <strong>*</strong></label>
+            <input type="password" name="password" class="form-control" id="nomorHandphone" placeholder="masukkan password pengguna" required>
+          </div>
+          <div class="form-group">
+            <label for="userLevel" class="col-form-label px-0 align-self-end">User Level <strong>*</strong></label>
+            <select style="font-size: 12px;" id="userLevel" name="roles" class="form-control">
+              <option>Admin</option>
+              <option>Karyawan</option>
+            </select>
+          </div>
+          <div class="form-group form-group-button">
+            <button type="submit" class="btn btn-action btn-action-save"><i class="fas fa-save"></i> Simpan</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Content End -->
 </div>
 
 @endsection
