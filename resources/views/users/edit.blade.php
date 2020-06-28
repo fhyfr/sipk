@@ -1,6 +1,6 @@
 @extends('layouts.global')
 
-@section('title') Edit User @endsection
+@section('title') Edit Data {{$user->name}} @endsection
 
 @section('content')
 
@@ -13,14 +13,8 @@
   </div>
   <div class="data-content">
     <div class="content-header">
-      <h2>Tambah Data Pengguna</h2>
+      <h2>Edit Data <strong>{{$user->name}}</strong></h2>
     </div>
-
-    @if(session('status'))
-    <div class="alert alert-success">
-      {{session('status')}}
-    </div>
-    @endif
 
     <form class="add-data" action="{{route('users.update', [$user->id])}}" method="POST">
       @csrf
@@ -32,22 +26,22 @@
         <div class="col-md-6 p-2">
           <div class="form-group">
             <label for="nomorPengguna" class="col-form-label px-0 align-self-end">Nama Lengkap <strong>*</strong></label>
-            <input type="text" value="{{$user->name}}" name="name" class="form-control" id="namaPengguna" placeholder="masukkan nama lengkap">
+            <input type="text" value="{{$user->name}}" name="name" class="form-control" id="namaPengguna" placeholder="masukkan nama lengkap" required>
           </div>
           <div class="form-group">
             <label for="emailPengguna" class="col-form-label px-0 align-self-end">Email <strong>*</strong></label>
-            <input type="email" value="{{$user->email}}" name="email" class="form-control" id="emailPengguna" placeholder="masukkan email">
+            <input type="email" value="{{$user->email}}" name="email" class="form-control" id="emailPengguna" placeholder="masukkan email" required>
           </div>
           <div class="form-group">
             <label for="userName" class="col-form-label px-0 align-self-end">Username <strong>*</strong></label>
-            <input type="text" value="{{$user->username}}" name="username" class="form-control" id="userName" required="true" placeholder="masukkan username">
+            <input type="text" value="{{$user->username}}" name="username" class="form-control" id="userName" required="true" placeholder="masukkan username" required>
           </div>
 
         </div>
         <div class="col-md-6 p-2">
           <div class="form-group">
             <label for="password" class="col-form-label px-0 align-self-end">Password <strong>*</strong></label>
-            <input type="password" value="{{$user->password}}" name="password" class="form-control" id="nomorHandphone" placeholder="masukkan password pengguna">
+            <input type="password" value="{{$user->password}}" name="password" class="form-control" id="nomorHandphone" placeholder="masukkan password pengguna" required>
           </div>
           <div class="form-group">
             <label for="userLevel" class="col-form-label px-0 align-self-end">User Level <strong>*</strong></label>

@@ -13,9 +13,9 @@ class KaryawansSeeder extends Seeder
     public function run()
     {
         $karyawans = new \App\Karyawan;
-        $karyawans->nik = "11170930000031";
-        $karyawans->name = "Firmansah";
-        $karyawans->jabatan = "Direktur";
+        $karyawans->nik = "1117093000002";
+        $karyawans->name = "Riski Alfiansah";
+        $karyawans->jabatan = "Karyawan";
         $karyawans->jk = "Laki-laki";
         $karyawans->agama = "Islam";
         $karyawans->telepon = "+62813-8550-5546";

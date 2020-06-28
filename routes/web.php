@@ -34,3 +34,4 @@ Route::delete('usersDeleteAll', 'UserController@deleteAll');
 
 //Routes menu data karyawan
 Route::resource("karyawans", "KaryawanController");
+Route::delete('karyawansDeleteAll', 'KaryawanController@deleteAll');

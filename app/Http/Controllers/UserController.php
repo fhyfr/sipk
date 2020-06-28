@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
@@ -139,6 +138,12 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('status', 'User berhasil dihapus');
     }
 
+    /**
+     * Remove all resource which selected by checkbox from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function deleteAll(Request $request)
     {
         $ids = $request->ids;

@@ -92,4 +92,7 @@
 </div>
 <!-- Content End -->
 
+<!-- Optional Javascript -->
+<script src="{{asset('js/deleteAllUsers.js')}}"></script>
+
 @endsection

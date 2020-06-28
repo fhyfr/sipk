@@ -58,7 +58,9 @@
                 @endif
             </div>
             <div class="checkbox text-left">
-                <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}> <label for="remember">{{ __('Remember Me') }}</label>
+                <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}> <label for="remember">
+                    <p>{{ __('Remember Me') }}</p>
+                </label>
             </div>
             <button type="submit" class="btn btn-login">Masuk</button>
         </form>

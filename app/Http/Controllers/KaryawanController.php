@@ -11,9 +11,21 @@ class KaryawanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // Menampilkan data karyawan
+        $karyawan = \App\Karyawan::paginate(5);
+
+        // Fitur Filter 
+
+        $filterKeyword = $request->get('keyword');
+
+        if ($filterKeyword) {
+
+            $karyawan = \App\Karyawan::where('nik', 'like', "%$filterKeyword%")->orWhere('name', 'like', "%$filterKeyword%")->orWhere('jabatan', 'like', "%$filterKeyword%")->orWhere('jk', 'like', "%$filterKeyword%")->orWhere('agama', 'like', "%$filterKeyword%")->orWhere('telepon', 'like', "%$filterKeyword%")->paginate(20);
+        }
+
+        return view('karyawans.index', ['karyawan' => $karyawan]);
     }
 
     /**
@@ -23,7 +35,7 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        //
+        return view('karyawans.create');
     }
 
     /**
@@ -34,7 +46,19 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //  Tampung data untuk ditambahkan ke database
+        $new_karyawan = new \App\Karyawan;
+        $new_karyawan->nik = $request->get('nik');
+        $new_karyawan->name = $request->get('name');
+        $new_karyawan->jabatan = $request->get('jabatan');
+        $new_karyawan->jk = $request->get('jk');
+        $new_karyawan->agama = $request->get('agama');
+        $new_karyawan->telepon = $request->get('telepon');
+
+
+        $new_karyawan->save();
+
+        return redirect()->route('karyawans.index')->with('status', 'Data Karyawan berhasil ditambahkan.');
     }
 
     /**
@@ -56,7 +80,10 @@ class KaryawanController extends Controller
      */
     public function edit($id)
     {
-        //
+        //Edit data karyawan
+        $karyawan = \App\Karyawan::findOrFail($id);
+
+        return view('karyawans.edit', ['karyawan' => $karyawan]);
     }
 
     /**
@@ -68,7 +95,19 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Update data karyawan ke database
+        $karyawan = \App\Karyawan::findOrFail($id);
+
+        $karyawan->nik = $request->get('nik');
+        $karyawan->name = $request->get('name');
+        $karyawan->jabatan = $request->get('jabatan');
+        $karyawan->jk = $request->get('jk');
+        $karyawan->agama = $request->get('agama');
+        $karyawan->telepon = $request->get('telepon');
+
+        $karyawan->save();
+
+        return redirect()->route('karyawans.index', [$id])->with('status', 'Data Karyawan berhasil diupdated');
     }
 
     /**
@@ -80,5 +119,18 @@ class KaryawanController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Remove all resource which selected by checkbox from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->ids;
+        \DB::table("karyawans")->whereIn('id', explode(",", $ids))->delete();
+        return response()->json(['success' => "Karyawan Deleted successfully."]);
     }
 }
