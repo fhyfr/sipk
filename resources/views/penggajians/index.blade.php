@@ -72,52 +72,64 @@
 
     <div class="plus-minus">
       <div class="pendapatan">
+        @foreach($potongan as $pt)
         <h3>Pengurangan Gaji</h3>
-        <form>
+        <form action="{{route('penggajians.update', [$pt->id])}}" method="post">
+          @csrf
           <div class="form-group row">
+            <!-- Input berupa hidden untuk mengganti method menjadi PUT -->
+            <input type="hidden" value="PUT" name="_method">
+
             <label for="alfa" class="col-sm-3 col-form-label">Alfa</label>
             <div class="col-sm-9">
-              <input type="password" class="form-control" id="alfa">
+              <input type="number" class="form-control" id="alfa" name="alfa" value="{{$pt->nm_alfa}}" required>
             </div>
           </div>
           <div class="form-group row">
             <label for="izin" class="col-sm-3 col-form-label">Izin</label>
             <div class="col-sm-9">
-              <input type="password" class="form-control" id="izin">
+              <input type="number" class="form-control" id="izin" name="izin" value="{{$pt->nm_izin}}" required>
             </div>
           </div>
           <div class="form-group row">
             <label for="sakit" class="col-sm-3 col-form-label">Sakit</label>
             <div class="col-sm-9">
-              <input type="password" class="form-control" id="sakit">
+              <input type="number" class="form-control" id="sakit" name="sakit" value="{{$pt->nm_sakit}}" required>
             </div>
           </div>
+          @endforeach
           <div class="form-group form-group-button">
             <button class="btn btn-action btn-action-save"><i class="fas fa-save"></i> Simpan</button>
           </div>
         </form>
       </div>
       <div class="potongan">
+        @foreach($pendapatan as $pd)
         <h3>Penambahan Gaji</h3>
-        <form>
+        <form action="{{route('penggajians.update', [$pd->id])}}" method="post">
+          @csrf
           <div class="form-group row">
+            <!-- Input berupa hidden untuk mengganti method menjadi PUT -->
+            <input type="hidden" value="PUT" name="_method">
+
             <label for="lembur" class="col-sm-3 col-form-label">Lembur</label>
             <div class="col-sm-9">
-              <input type="password" class="form-control" id="lembur">
+              <input type="number" class="form-control" id="lembur" name="lembur" value="{{$pd->nm_lembur}}" required>
             </div>
           </div>
           <div class="form-group row">
             <label for="uangMakan" class="col-sm-3 col-form-label">Uang Makan</label>
             <div class="col-sm-9">
-              <input type="password" class="form-control" id="uangMakan">
+              <input type="number" class="form-control" id="uangMakan" name="makan" value="{{$pd->nm_lembur}}" required>
             </div>
           </div>
           <div class="form-group row">
             <label for="tunjangan" class="col-sm-3 col-form-label">Tunjangan</label>
             <div class="col-sm-9">
-              <input type="password" class="form-control" id="tunjangan">
+              <input type="number" class="form-control" id="tunjangan" name="tunjangan" value="{{$pd->nm_tunjangan}}" required>
             </div>
           </div>
+          @endforeach
           <div class="form-group form-group-button">
             <button class="btn btn-action btn-action-save"><i class="fas fa-save"></i> Simpan</button>
           </div>

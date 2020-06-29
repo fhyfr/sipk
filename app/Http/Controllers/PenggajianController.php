@@ -15,7 +15,10 @@ class PenggajianController extends Controller
     {
         //
         $jabatan = \App\Jabatan::paginate(5);
-        return view('penggajians.index', ['jabatan' => $jabatan]);
+        $potongan = \App\Potongan::paginate(2);
+        $pendapatan = \App\Pendapatan::paginate(2);
+
+        return view('penggajians.index', ['jabatan' => $jabatan, 'potongan' => $potongan, 'pendapatan' => $pendapatan]);
     }
 
     /**
@@ -86,14 +89,38 @@ class PenggajianController extends Controller
     {
         // Update data gaji pokok ke database
         $jabatan = \App\Jabatan::findOrFail($id);
+        $potongan = \App\Potongan::findOrFail($id);
+        $pendapatan = \App\Pendapatan::findOrFail($id);
 
-        $jabatan->jabatan = $request->get('jabatan');
-        $jabatan->gaji_pokok = $request->get('gaji_pokok');
-        $jabatan->insentif = $request->get('insentif');
+        if ($request->get('jabatan')) {
 
-        $jabatan->save();
+            $jabatan->jabatan = $request->get('jabatan');
+            $jabatan->gaji_pokok = $request->get('gaji_pokok');
+            $jabatan->insentif = $request->get('insentif');
 
-        return redirect()->route('penggajians.index', [$id])->with('status', 'Data Gaji Pokok berhasil diupdated');
+            $jabatan->save();
+            return redirect()->route('penggajians.index', [$id])->with('status', 'Data Golongan dan Gaji Pokok berhasil diupdated');
+        }
+
+        if ($request->get('alfa')) {
+            $potongan->nm_alfa = $request->get('alfa');
+            $potongan->nm_izin = $request->get('izin');
+            $potongan->nm_sakit = $request->get('sakit');
+
+            $potongan->save();
+
+            return redirect()->route('penggajians.index', [$id])->with('status', 'Data Pengurangan Gaji berhasil diupdated');
+        }
+
+        if ($request->get('lembur')) {
+            $pendapatan->nm_lembur = $request->get('lembur');
+            $pendapatan->nm_makan = $request->get('makan');
+            $pendapatan->nm_tunjangan = $request->get('tunjangan');
+
+            $pendapatan->save();
+
+            return redirect()->route('penggajians.index', [$id])->with('status', 'Data Penambahan Gaji berhasil diupdated');
+        }
     }
 
     /**
