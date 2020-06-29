@@ -19,7 +19,7 @@
       <!-- Setting Menu Start -->
       <li class="sidebar-header">PENGATURAN</li>
       <li><a class="sidebar-item {{ (request()->is('perusahaans')) || (request()->is('perusahaans/create')) || (request()->is('perusahaans/{$perusahaans->id}/edit')) ? 'active' : '' }}" href="{{url('/perusahaans')}}"><i class="fas fa-cogs"></i> Aplikasi</a></li>
-      <li><a class="sidebar-item" href="pengaturan-gaji.html"><i class="fas fa-funnel-dollar"></i> Penggajian</a></li>
+      <li><a class="sidebar-item {{ (request()->is('penggajians')) || (request()->is('penggajians/create')) || (request()->is('penggajians/{$penggajians->id}/edit')) ? 'active' : '' }}" href="{{url('/penggajians')}}"><i class="fas fa-funnel-dollar"></i> Penggajian</a></li>
       <!-- Setting Menu End -->
     </ul>
   </section>

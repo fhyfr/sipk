@@ -43,3 +43,7 @@ Route::delete('absensisDeleteAll', 'AbsensiController@deleteAll');
 
 // Routes menu pengaturan umum
 Route::resource("perusahaans", "PerusahaanController");
+
+// Routes menu data penggajian
+Route::resource("penggajians", "PenggajianController");
+Route::delete('penggajiansDeleteAll', 'PenggajianController@deleteAll');
