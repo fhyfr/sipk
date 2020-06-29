@@ -25,7 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $perusahaan = \App\Perusahaan::first();
 
-        return view('home');
+        return view('home', ['perusahaan' => $perusahaan]);
     }
 }

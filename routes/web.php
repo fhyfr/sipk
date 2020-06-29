@@ -40,3 +40,6 @@ Route::delete('karyawansDeleteAll', 'KaryawanController@deleteAll');
 Route::resource("absensis", "AbsensiController");
 Route::get('absensis/{name}', 'AbsensiController@olahTabelKaryawanAbsensi');
 Route::delete('absensisDeleteAll', 'AbsensiController@deleteAll');
+
+// Routes menu pengaturan umum
+Route::resource("perusahaans", "PerusahaanController");

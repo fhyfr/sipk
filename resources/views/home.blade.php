@@ -7,7 +7,7 @@
 <!-- Content Strt -->
 <div class="content-wrapper home">
     <h1>Selamat Datang, {{Auth::user()->name}}</h1>
-    <h2>di Sistem Penggajian Karyawan PT. Gajian</h2>
+    <h2>di Sistem Penggajian Karyawan {{$perusahaan->nama_perusahaan}}</h2>
 </div>
 <!-- Content End -->
 

@@ -15,6 +15,7 @@ class AbsensiController extends Controller
     {
         // Menampilkan data absensi
         $absensi = \App\Absensi::paginate(5);
+        $perusahaan = \App\Perusahaan::first();
 
         // Fitur Filter
         $filterKeyword = $request->get('keyword');
