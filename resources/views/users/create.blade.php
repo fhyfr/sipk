@@ -4,12 +4,6 @@
 
 @section("content")
 
-@if(session('status'))
-<div class="alert alert-success">
-  {{session('status')}}
-</div>
-@endif
-
 <!-- Content Start -->
 <div class="content-wrapper non-dashboard">
   <div class="heading">

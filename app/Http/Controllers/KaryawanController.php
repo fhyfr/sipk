@@ -131,6 +131,6 @@ class KaryawanController extends Controller
     {
         $ids = $request->ids;
         \DB::table("karyawans")->whereIn('id', explode(",", $ids))->delete();
-        return response()->json(['success' => "Karyawan Deleted successfully."]);
+        return response()->json(['success' => "Karyawan berhasil dihapus."]);
     }
 }

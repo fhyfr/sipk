@@ -38,7 +38,7 @@
         <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
             @csrf
             <div class="form-group">
-                <input type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="username" required autofocus>
+                <input type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" placeholder="username" required>
                 <span><i class="fa fa-user" aria-hidden="true"></i></span>
 
                 @error('username')

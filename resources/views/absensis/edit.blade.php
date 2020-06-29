@@ -1,0 +1,93 @@
+@extends("layouts.global")
+
+@section("title") Edit Data {{$absensi->name}} @endsection
+
+@section("content")
+<!-- Content Start -->
+<div class="content-wrapper non-dashboard">
+  <div class="heading">
+    <a href="{{url('absensis')}}">
+      <h1><i class="fas fa-chevron-left"></i> Kembali</h1>
+    </a>
+  </div>
+  <div class="data-content">
+    <div class="content-header">
+      <h2>Edit Data Kehadiran <strong>{{$absensi->absen_name}}</strong></h2>
+    </div>
+
+    <form class="add-data absensi" action="{{route('absensis.update',[$absensi->id])}}" method="post">
+      @csrf
+      <div class="form-row">
+
+        <!-- Input berupa hidden untuk mengganti method menjadi PUT -->
+        <input type="hidden" value="PUT" name="_method">
+
+        <div class="col-md-6 p-2">
+          <div class="form-group">
+            <label for="namaKaryawan" class="col-form-label px-0 align-self-end">Nama Karyawan <strong>*</strong></label>
+            <select style="font-size: 12px;" name="absen_name" id="namaKaryawan" class="form-control">
+              @foreach($karyawan as $karya)
+              <option {{ ($karya->name == $absensi->absen_name)  ? 'selected' : '' }}>{{$karya->name}}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-row month-year">
+            <div class="col">
+              <label for="month" class="col-form-label px-0 align-self-end">Bulan</label>
+              <select style="font-size: 12px;" id="month" name="bulan" class="form-control">
+                <option {{ ($absensi->bulan) == 'Januari'   ? 'selected' : '' }}>Januari</option>
+                <option {{ ($absensi->bulan) == 'Februari'   ? 'selected' : '' }}>Februari</option>
+                <option {{ ($absensi->bulan) == 'Maret'   ? 'selected' : '' }}>Maret</option>
+                <option {{ ($absensi->bulan) == 'April'   ? 'selected' : '' }}>April</option>
+                <option {{ ($absensi->bulan) == 'Mei'   ? 'selected' : '' }}>Mei</option>
+                <option {{ ($absensi->bulan) == 'Juni'   ? 'selected' : '' }}>Juni</option>
+                <option {{ ($absensi->bulan) == 'Juli'   ? 'selected' : '' }}>Juli</option>
+                <option {{ ($absensi->bulan) == 'Agustus'   ? 'selected' : '' }}>Agustus</option>
+                <option {{ ($absensi->bulan) == 'September'   ? 'selected' : '' }}>September</option>
+                <option {{ ($absensi->bulan) == 'Oktober'   ? 'selected' : '' }}>Oktober</option>
+                <option {{ ($absensi->bulan) == 'November'   ? 'selected' : '' }}>November</option>
+                <option {{ ($absensi->bulan) == 'Desember'   ? 'selected' : '' }}>Desember</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="year" class="col-form-label px-0 align-self-end">Tahun <strong>*</strong></label>
+              <input type="number" id="year" name="tahun" value="{{$absensi->tahun}}" class="form-control" required>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 p-2 mt-2">
+          <div class="form-row">
+            <div class="col-3">
+              <label for="hadir" class="col-form-label px-0 align-self-end">Hadir <strong>*</strong></label>
+              <input type="number" id="hadir" name="hadir" value="{{$absensi->jml_hadir}}" class="form-control" required>
+            </div>
+            <div class="col-3">
+              <label for="alfa" class="col-form-label px-0 align-self-end">Alfa <strong>*</strong></label>
+              <input type="number" id="alfa" name="alfa" value="{{$absensi->jml_alfa}}" class="form-control" required>
+            </div>
+            <div class="col-3">
+              <label for="izin" class="col-form-label px-0 align-self-end">Izin <strong>*</strong></label>
+              <input type="number" id="izin" name="izin" value="{{$absensi->jml_izin}}" class="form-control" required>
+            </div>
+          </div>
+          <div class="form-row mt-3">
+            <div class="col-3">
+              <label for="sakit" class="col-form-label px-0 align-self-end">Sakit <strong>*</strong></label>
+              <input type="number" id="sakit" name="sakit" value="{{$absensi->jml_sakit}}" class="form-control" required>
+            </div>
+            <div class="col-3">
+              <label for="lembur" class="col-form-label px-0 align-self-end">Lembur <strong>*</strong></label>
+              <input type="number" id="lembur" name="lembur" value="{{$absensi->jml_lembur}}" class="form-control" required>
+            </div>
+          </div>
+          <div class="form-group form-group-button">
+            <button class="btn btn-action btn-action-save"><i class="fas fa-save"></i> Simpan</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Content End -->
+
+@endsection
