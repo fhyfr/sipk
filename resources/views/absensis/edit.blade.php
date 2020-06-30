@@ -12,7 +12,7 @@
   </div>
   <div class="data-content">
     <div class="content-header">
-      <h2>Edit Data Kehadiran <strong>{{$absensi->absen_name}}</strong></h2>
+      <h2>Edit Data Kehadiran <strong>{{$absensi->name}}</strong></h2>
     </div>
 
     <form class="add-data absensi" action="{{route('absensis.update',[$absensi->id])}}" method="post">
@@ -25,9 +25,9 @@
         <div class="col-md-6 p-2">
           <div class="form-group">
             <label for="namaKaryawan" class="col-form-label px-0 align-self-end">Nama Karyawan <strong>*</strong></label>
-            <select style="font-size: 12px;" name="absen_name" id="namaKaryawan" class="form-control">
+            <select style="font-size: 12px;" name="name" id="namaKaryawan" class="form-control">
               @foreach($karyawan as $karya)
-              <option {{ ($karya->name == $absensi->absen_name)  ? 'selected' : '' }}>{{$karya->name}}</option>
+              <option {{ ($karya->name == $absensi->name)  ? 'selected' : '' }}>{{$karya->name}}</option>
               @endforeach
             </select>
           </div>

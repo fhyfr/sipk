@@ -35,8 +35,9 @@
             <!-- Akan Relatif Pada Data yang Ada di Pengturan Gaji: Jika Data Gaji Pokok Bertambah Maka Jabatan Akan Bertambah -->
             <label for="jabatan" class="col-form-label px-0 align-self-end">Jabatan <strong>*</strong></label>
             <select style="font-size: 12px;" id="jabatan" class="form-control" name="jabatan">
-              <option {{ ($karyawan->jabatan == 'direktur') || ($karyawan->jabatan == 'Direktur')  ? 'selected' : '' }}>Direktur</option>
-              <option {{ ($karyawan->jabatan == 'marketing') || ($karyawan->jabatan == 'Marketing')  ? 'selected' : '' }}>Marketing</option>
+              @foreach($jabatan as $jb)
+              <option {{ ($karyawan->jabatan == $jb->jabatan)  ? 'selected' : '' }}>{{$jb->jabatan}}</option>
+              @endforeach
             </select>
           </div>
         </div>

@@ -13,6 +13,11 @@ class AbsensiController extends Controller
      */
     public function index(Request $request)
     {
+        $gaji = \DB::table('karyawans')
+            ->join('absensis', 'karyawans.name', '=', 'absensis.name')
+            ->join('jabatans', 'karyawans.jabatan', '=', 'jabatans.jabatan')
+            ->get();
+
         // Menampilkan data absensi
         $absensi = \App\Absensi::paginate(5);
         $perusahaan = \App\Perusahaan::first();
@@ -23,10 +28,10 @@ class AbsensiController extends Controller
         $tahun = $request->get('tahun');
 
         if ($filterKeyword) {
-            $absensi = \App\Absensi::where('absen_name', 'like', "%$filterKeyword%")->where('bulan', "$bulan")->where('tahun', "$tahun")->paginate(20);
+            $absensi = \App\Absensi::where('name', 'like', "%$filterKeyword%")->where('bulan', "$bulan")->where('tahun', "$tahun")->paginate(20);
         }
 
-        return view('absensis.index', ['absensi' => $absensi, 'bulan' => $bulan, 'tahun' => $tahun]);
+        return view('absensis.index', ['absensi' => $absensi, 'bulan' => $bulan, 'tahun' => $tahun, 'gaji' => $gaji]);
     }
 
     /**
@@ -51,7 +56,7 @@ class AbsensiController extends Controller
     {
         //  Tampung data untuk ditambahkan ke database
         $new_absen = new \App\Absensi;
-        $new_absen->absen_name = $request->get('absen_name');
+        $new_absen->name = $request->get('name');
         $new_absen->bulan = $request->get('bulan');
         $new_absen->tahun = $request->get('tahun');
         $new_absen->jml_hadir = $request->get('hadir');
@@ -103,7 +108,7 @@ class AbsensiController extends Controller
         // Update Data Kehadiran ke database
         $absen_update = \App\Absensi::findOrFail($id);
 
-        $absen_update->absen_name = $request->get('absen_name');
+        $absen_update->name = $request->get('name');
         $absen_update->bulan = $request->get('bulan');
         $absen_update->tahun = $request->get('tahun');
         $absen_update->jml_hadir = $request->get('hadir');

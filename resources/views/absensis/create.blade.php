@@ -22,7 +22,7 @@
         <div class="col-md-6 p-2">
           <div class="form-group">
             <label for="namaKaryawan" class="col-form-label px-0 align-self-end">Nama Karyawan <strong>*</strong></label>
-            <select style="font-size: 12px;" name="absen_name" id="namaKaryawan" class="form-control">
+            <select style="font-size: 12px;" name="name" id="namaKaryawan" class="form-control">
               <option>==Pilih Nama Karyawan==</option>
               @foreach($karyawan as $nama)
               <option>{{$nama->name}}</option>

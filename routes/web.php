@@ -47,3 +47,8 @@ Route::resource("perusahaans", "PerusahaanController");
 // Routes menu data penggajian
 Route::resource("penggajians", "PenggajianController");
 Route::delete('penggajiansDeleteAll', 'PenggajianController@deleteAll');
+
+// Routes menu data penggajian
+Route::resource("gajis", "GajiController");
+Route::get('gajis/{name}/{bulan?}', 'GajiController@show');
+Route::delete('gajisDeleteAll', 'GajiController@deleteAll');

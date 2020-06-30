@@ -1,28 +1,26 @@
-@extends("layouts.global")
+@extends('layouts.global')
 
-@section("title") Data Kehadiran @endsection
+@section('title') Data Gaji Karyawan @endsection
 
-@section("content")
+@section('content')
 <!-- Content Start -->
 <div class="content-wrapper non-dashboard">
   <div class="heading">
-    <h1>Data Kehadiran Pengguna</h1>
+    <h1>Data Gaji Karyawan</h1>
     @if(session('status'))
     <div class="alert alert-success">
       {{session('status')}}
     </div>
     @endif
-
   </div>
   <div class="data-content">
-    <!-- Fitur Filter Start -->
     <div class="filter-data">
       <h2>Filter Pencarian</h2>
-      <form action="{{route('absensis.index')}}">
+      <form action="{{route('gajis.index')}}">
         <div class="form-filter">
           <div class="form-group">
             <label for="namaKaryawan" class="col-form-label px-0 align-self-end">Nama Karyawan</label>
-            <input type="text" class="form-control" id="namaKaryawan" name="keyword" value="{{Request::get('keyword')}}" placeholder="masukkan nama">
+            <input type="text" class="form-control" id="namaKaryawan" placeholder="masukkan nama">
           </div>
           <div class="form-group">
             <label for="month" class="col-form-label px-0 align-self-end">Bulan</label>
@@ -54,8 +52,6 @@
         </div>
       </form>
     </div>
-    <!-- Fitur Filter End -->
-
     <div class="content-header row">
       <div class="dropshow">
         <p>Tampilkan</p>
@@ -70,8 +66,8 @@
         <p>Data</p>
       </div>
       <div class="action">
-        <a href="{{route('absensis.create')}}" class="btn btn-action btn-add"><i class="fas fa-plus-circle"></i> <span>Tambah Data</span></a>
-        <a class="btn delete_all" data-url="{{ url('absensisDeleteAll') }}"> <i class="fas fa-trash-alt"></i></a>
+        <a href="" class="btn btn-action btn-add"><i class="fas fa-print"></i> Cetak Slip Gaji</a>
+        <a href=""><i class="fas fa-trash-alt"></i></a>
       </div>
     </div>
 
@@ -80,39 +76,59 @@
         <thead>
           <tr>
             <th class="center" scope="col">No</th>
-            <th class="center" scope="col"><input type="checkbox" id="master"></th>
+            <th class="center" scope="col"><input type="checkbox" aria-label="Checkbox for following text input"></th>
             <th class="center" scope="col"><i class="fas fa-pen-square"></i></th>
+            <th class="center" scope="col">NIK</th>
             <th class="center" scope="col">Nama Karyawan</th>
             <th class="center" scope="col">Bulan</th>
             <th class="center" scope="col">Tahun</th>
-            <th class="center" scope="col">Hadir</th>
-            <th class="center" scope="col">Alfa</th>
-            <th class="center" scope="col">Izin</th>
-            <th class="center" scope="col">Sakit</th>
-            <th class="center" scope="col">Lembur</th>
+            <th class="center" scope="col">Total Gaji</th>
+            <th class="center" scope="col">Rincian</th>
           </tr>
         </thead>
         <tbody>
           <?php
           $i = 0;
-          $jml = count($absensi);
+          $jml = count($gaji);
           ?>
-          @foreach($absensi as $absen)
+          @foreach($gaji as $g)
           <?php
           $i++;
           ?>
           <tr>
+
+            <!-- Jika jumlah alfa,sakit, dan izin sama dengan nol maka akan dapat insentif -->
+            <?php
+            if (($g->jml_alfa && $g->jml_sakit && $g->jml_izin) == 0) {
+              $insentif = $pendapatan->nm_makan * $g->jml_hadir;
+            } else {
+              $insentif = 0;
+            };
+            ?>
+
             <th class="center" scope="row">{{$i}}</th>
-            <td class="center"><a href=""><input type="checkbox" class="sub_chk" data-id="{{$absen->id}}"></a></td>
-            <td class="center"><a href="{{route('absensis.edit', [$absen->id] )}}"><i class="fas fa-pen-square"></i></a></td>
-            <td class="center">{{$absen->name}}</td>
-            <td class="center">{{$absen->bulan}}</td>
-            <td class="center">{{$absen->tahun}}</td>
-            <td class="center">{{$absen->jml_hadir}}</td>
-            <td class="center">{{$absen->jml_alfa}}</td>
-            <td class="center">{{$absen->jml_izin}}</td>
-            <td class="center">{{$absen->jml_sakit}}</td>
-            <td class="center">{{$absen->jml_lembur}}</td>
+            <td class="center"><a href=""><input type="checkbox" aria-label="Checkbox for following text input"></a></td>
+            <td class="center"><a href=""><i class="fas fa-pen-square"></i></a></td>
+            <td class="center">{{$g->nik}}</td>
+            <td class="center">{{$g->name}}</td>
+            <td class="center">{{$g->bulan}}</td>
+            <td class="center">{{$g->tahun}}</td>
+            <td class="center">Rp{{number_format
+              (
+              (
+                ($g->gaji_pokok + 
+                $pendapatan->nm_tunjangan + 
+                ($pendapatan->nm_makan*$g->jml_hadir) +
+                ($g->jml_lembur*$pendapatan->nm_lembur) + $insentif
+              ) 
+              - 
+              (
+                ($g->jml_alfa*$potongan->nm_alfa)+($g->jml_izin*$potongan->nm_izin)+($g->jml_sakit*$potongan->nm_sakit)
+              )
+              ), 0)
+            }}
+            </td>
+            <td class="center"><a href="{{route('gajis.show',[$g->id])}}"><i class="fas fa-eye"></i></a></td>
           </tr>
           @endforeach
         </tbody>
@@ -120,17 +136,18 @@
     </div>
 
     <div class="content-footer">
-      <p>Menampilkan <strong>{{$jml}}</strong> data</p>
+      <p>Menampilkan <strong>1</strong> sampai <strong>2</strong> dari <strong>2</strong> data</p>
       <nav aria-label="Page navigation example">
         <ul class="pagination">
-          {{$absensi->appends(Request::all())->links()}}
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
         </ul>
       </nav>
     </div>
   </div>
 </div>
 <!-- Content End -->
-
-<!-- Optional Javascript -->
-<script src="{{asset('js/deleteAllAbsensi.js')}}"></script>
 @endsection

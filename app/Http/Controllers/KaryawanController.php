@@ -35,7 +35,9 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        return view('karyawans.create');
+        $jabatan = \App\Jabatan::all();
+
+        return view('karyawans.create', ['jabatan' => $jabatan]);
     }
 
     /**
@@ -82,8 +84,9 @@ class KaryawanController extends Controller
     {
         //Edit data karyawan
         $karyawan = \App\Karyawan::findOrFail($id);
+        $jabatan = \App\Jabatan::all();
 
-        return view('karyawans.edit', ['karyawan' => $karyawan]);
+        return view('karyawans.edit', ['karyawan' => $karyawan, 'jabatan' => $jabatan]);
     }
 
     /**
