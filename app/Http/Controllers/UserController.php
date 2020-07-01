@@ -24,7 +24,7 @@ class UserController extends Controller
 
         if ($filterKeyword) {
 
-            $users = \App\User::where('name', 'like', "%$filterKeyword%")->orWhere('email', 'like', "%$filterKeyword%")->orWhere('username', 'like', "%$filterKeyword%")->orWhere('roles', 'like', "%$filterKeyword%")->paginate(20);
+            $users = \App\User::where('name', 'like', "%$filterKeyword%")->orWhere('email', 'like', "%$filterKeyword%")->orWhere('username', 'like', "%$filterKeyword%")->orWhere('roles', 'like', "%$filterKeyword%")->latest()->paginate(20);
         }
         return view('users.index', ['users' => $users]);
     }

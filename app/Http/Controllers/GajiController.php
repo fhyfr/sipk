@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
+use PDF;
 
 use Illuminate\Support\Carbon;
 
@@ -19,11 +20,35 @@ class GajiController extends Controller
         $gaji = \DB::table('karyawans')
             ->join('jabatans', 'karyawans.jabatan', '=', 'jabatans.jabatan')
             ->join('absensis', 'karyawans.name', '=', 'absensis.name')
+            ->latest('absensis.created_at')
+            ->paginate(5);
+        $bulan = \DB::table('absensis')
+            ->select('bulan')
+            ->distinct()
             ->get();
-        $bulan = $request->get('bulan');
-        $tahun = $request->get('tahun');
+        $tahun = \DB::table('absensis')
+            ->select('tahun')
+            ->distinct()
+            ->get();
+
         $potongan = \App\Potongan::first();
         $pendapatan = \App\Pendapatan::first();
+
+        // Fitur Filter
+        $filterKeyword = $request->get('keyword');
+
+        if ($filterKeyword) {
+
+            $b = $request->get('bulan');
+            $t = $request->get('tahun');
+            $gaji = \DB::table('karyawans')
+                ->join('jabatans', 'karyawans.jabatan', '=', 'jabatans.jabatan')
+                ->join('absensis', 'karyawans.name', '=', 'absensis.name')
+                ->where('absensis.name', 'LIKE', '%' . $filterKeyword . '%')
+                ->where('absensis.bulan', 'LIKE', '%' . $b . '%')
+                ->where('absensis.tahun', 'LIKE', '%' . $t . '%')
+                ->paginate(20);
+        }
 
         return view('gajis.index', ['gaji' => $gaji, 'bulan' => $bulan, 'tahun' => $tahun, 'potongan' => $potongan, 'pendapatan' => $pendapatan]);
     }
@@ -67,11 +92,12 @@ class GajiController extends Controller
         // Set lokasi timezone ke indonesia (ID)
         \Carbon\Carbon::setLocale('id');
         $tanggal = CarbonImmutable::now()->isoFormat('dddd, D MMMM YYYY ');
+        $slip = 'SIPK-' . rand(0, 9999);
 
         $potongan = \App\Potongan::first();
         $pendapatan = \App\Pendapatan::first();
 
-        return view('gajis.show', ['gaji' => $gaji, 'potongan' => $potongan, 'pendapatan' => $pendapatan, 'perusahaan' => $perusahaan, 'tanggal' => $tanggal]);
+        return view('gajis.show', ['gaji' => $gaji, 'potongan' => $potongan, 'pendapatan' => $pendapatan, 'perusahaan' => $perusahaan, 'tanggal' => $tanggal, 'slip' => $slip]);
     }
 
     /**

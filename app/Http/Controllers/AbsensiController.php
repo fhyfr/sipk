@@ -13,25 +13,32 @@ class AbsensiController extends Controller
      */
     public function index(Request $request)
     {
-        $gaji = \DB::table('karyawans')
-            ->join('absensis', 'karyawans.name', '=', 'absensis.name')
-            ->join('jabatans', 'karyawans.jabatan', '=', 'jabatans.jabatan')
-            ->get();
 
         // Menampilkan data absensi
-        $absensi = \App\Absensi::paginate(5);
+        $absensi = \App\Absensi::latest()->paginate(5);
         $perusahaan = \App\Perusahaan::first();
+        $bulan = \DB::table('absensis')
+            ->select('bulan')
+            ->distinct()
+            ->get();
+        $tahun = \DB::table('absensis')
+            ->select('tahun')
+            ->distinct()
+            ->get();
+
+
 
         // Fitur Filter
         $filterKeyword = $request->get('keyword');
-        $bulan = $request->get('bulan');
-        $tahun = $request->get('tahun');
 
         if ($filterKeyword) {
-            $absensi = \App\Absensi::where('name', 'like', "%$filterKeyword%")->where('bulan', "$bulan")->where('tahun', "$tahun")->paginate(20);
+            $b = $request->get('bulan');
+            $t = $request->get('tahun');
+
+            $absensi = \App\Absensi::where('name', 'like', "%$filterKeyword%")->where('bulan', "$b")->where('tahun', "$t")->paginate(20);
         }
 
-        return view('absensis.index', ['absensi' => $absensi, 'bulan' => $bulan, 'tahun' => $tahun, 'gaji' => $gaji]);
+        return view('absensis.index', ['absensi' => $absensi, 'bulan' => $bulan, 'tahun' => $tahun]);
     }
 
     /**

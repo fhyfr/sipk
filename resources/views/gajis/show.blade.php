@@ -13,7 +13,7 @@
   <div class="data-content">
     <div class="content-header row">
       <h2>Detail Gaji <em>{{$gaji->name}}</em></h2>
-      <a href="" class="btn btn-action btn-print"><i class="fas fa-print"></i> Cetak Slip Gaji</a>
+      <a href="{{url('karyawan/pdf')}}" target="_blank" class="btn btn-action btn-print"><i class="fas fa-print"></i> Cetak Slip Gaji</a>
     </div>
     <div class="slip-gaji">
       <div class="header">
@@ -30,7 +30,7 @@
               <h3>Jabatan</h3>
             </div>
             <div class="value">
-              <p>: <span>1</span></p>
+              <p>: <span>{{$slip}}-{{$gaji->tahun}}</span></p>
               <p>: <span>{{$gaji->nik}}</span></p>
               <p>: <span>{{$gaji->name}}</span></p>
               <p>: <span>{{$gaji->jabatan}}</span></p>

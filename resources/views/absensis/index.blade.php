@@ -27,25 +27,17 @@
           <div class="form-group">
             <label for="month" class="col-form-label px-0 align-self-end">Bulan</label>
             <select style="font-size: 12px;" id="month" name="bulan" class="form-control">
-              <option {{ $bulan == 'Januari'   ? 'selected' : '' }}>Januari</option>
-              <option {{ $bulan == 'Februari'   ? 'selected' : '' }}>Februari</option>
-              <option {{ $bulan == 'Maret'   ? 'selected' : '' }}>Maret</option>
-              <option {{ $bulan == 'April'   ? 'selected' : '' }}>April</option>
-              <option {{ $bulan == 'Mei'   ? 'selected' : '' }}>Mei</option>
-              <option {{ $bulan == 'Juni'   ? 'selected' : '' }}>Juni</option>
-              <option {{ $bulan == 'Juli'   ? 'selected' : '' }}>Juli</option>
-              <option {{ $bulan == 'Agustus'   ? 'selected' : '' }}>Agustus</option>
-              <option {{ $bulan == 'September'   ? 'selected' : '' }}>September</option>
-              <option {{ $bulan == 'Oktober'   ? 'selected' : '' }}>Oktober</option>
-              <option {{ $bulan == 'November'   ? 'selected' : '' }}>November</option>
-              <option {{ $bulan == 'Desember'   ? 'selected' : '' }}>Desember</option>
+              @foreach($bulan as $bl)
+              <option>{{$bl->bulan}}</option>
+              @endforeach
             </select>
           </div>
           <div class="form-group">
             <label for="year" class="col-form-label px-0 align-self-end">Tahun</label>
             <select style="font-size: 12px;" id="year" name="tahun" class="form-control">
-              @for($i=2000; $i<2030 ; $i++) <option {{ $tahun == $i ? 'selected' : '' }}>{{$i}}</option>
-                @endfor
+              @foreach($tahun as $th)
+              <option>{{$th->tahun}}</option>
+              @endforeach
             </select>
           </div>
           <div class="form-group d-flex justify-content-center align-items-center">

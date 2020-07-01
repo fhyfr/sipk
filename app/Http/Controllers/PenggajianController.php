@@ -14,7 +14,7 @@ class PenggajianController extends Controller
     public function index()
     {
         //
-        $jabatan = \App\Jabatan::paginate(5);
+        $jabatan = \App\Jabatan::latest()->paginate(5);
         $potongan = \App\Potongan::paginate(2);
         $pendapatan = \App\Pendapatan::paginate(2);
 

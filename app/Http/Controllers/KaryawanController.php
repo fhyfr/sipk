@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use PDF;
+
+use DB;
+
 class KaryawanController extends Controller
 {
     /**
@@ -14,7 +18,7 @@ class KaryawanController extends Controller
     public function index(Request $request)
     {
         // Menampilkan data karyawan
-        $karyawan = \App\Karyawan::paginate(5);
+        $karyawan = \App\Karyawan::latest()->paginate(5);
 
         // Fitur Filter 
 
@@ -135,5 +139,18 @@ class KaryawanController extends Controller
         $ids = $request->ids;
         \DB::table("karyawans")->whereIn('id', explode(",", $ids))->delete();
         return response()->json(['success' => "Karyawan berhasil dihapus."]);
+    }
+
+    // fungsi print PDF
+    public function pdf()
+    {
+        $jabatan = \App\Jabatan::all();
+
+        set_time_limit(300);
+
+        // fungsi cetak pdf
+        $pdf = PDF::loadview('print.slip')->setPaper('a4', 'landscape');;
+
+        return $pdf->stream();
     }
 }

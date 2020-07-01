@@ -35,10 +35,10 @@ Route::delete('usersDeleteAll', 'UserController@deleteAll');
 //Routes menu data karyawan
 Route::resource("karyawans", "KaryawanController");
 Route::delete('karyawansDeleteAll', 'KaryawanController@deleteAll');
+Route::get('/karyawan/pdf', 'KaryawanController@pdf');
 
 // Routes menu data absensi
 Route::resource("absensis", "AbsensiController");
-Route::get('absensis/{name}', 'AbsensiController@olahTabelKaryawanAbsensi');
 Route::delete('absensisDeleteAll', 'AbsensiController@deleteAll');
 
 // Routes menu pengaturan umum
@@ -50,5 +50,6 @@ Route::delete('penggajiansDeleteAll', 'PenggajianController@deleteAll');
 
 // Routes menu data penggajian
 Route::resource("gajis", "GajiController");
-Route::get('gajis/{name}/{bulan?}', 'GajiController@show');
-Route::delete('gajisDeleteAll', 'GajiController@deleteAll');
+
+// Routes menu Laporan
+Route::resource("laporans", "LaporanController");

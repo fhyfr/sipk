@@ -14,36 +14,29 @@
     @endif
   </div>
   <div class="data-content">
+    <!-- Fitur Filter Start -->
     <div class="filter-data">
       <h2>Filter Pencarian</h2>
       <form action="{{route('gajis.index')}}">
         <div class="form-filter">
           <div class="form-group">
             <label for="namaKaryawan" class="col-form-label px-0 align-self-end">Nama Karyawan</label>
-            <input type="text" class="form-control" id="namaKaryawan" placeholder="masukkan nama">
+            <input type="text" class="form-control" id="namaKaryawan" name="keyword" value="{{Request::get('keyword')}}" placeholder="masukkan nama">
           </div>
           <div class="form-group">
             <label for="month" class="col-form-label px-0 align-self-end">Bulan</label>
             <select style="font-size: 12px;" id="month" name="bulan" class="form-control">
-              <option {{ $bulan == 'Januari'   ? 'selected' : '' }}>Januari</option>
-              <option {{ $bulan == 'Februari'   ? 'selected' : '' }}>Februari</option>
-              <option {{ $bulan == 'Maret'   ? 'selected' : '' }}>Maret</option>
-              <option {{ $bulan == 'April'   ? 'selected' : '' }}>April</option>
-              <option {{ $bulan == 'Mei'   ? 'selected' : '' }}>Mei</option>
-              <option {{ $bulan == 'Juni'   ? 'selected' : '' }}>Juni</option>
-              <option {{ $bulan == 'Juli'   ? 'selected' : '' }}>Juli</option>
-              <option {{ $bulan == 'Agustus'   ? 'selected' : '' }}>Agustus</option>
-              <option {{ $bulan == 'September'   ? 'selected' : '' }}>September</option>
-              <option {{ $bulan == 'Oktober'   ? 'selected' : '' }}>Oktober</option>
-              <option {{ $bulan == 'November'   ? 'selected' : '' }}>November</option>
-              <option {{ $bulan == 'Desember'   ? 'selected' : '' }}>Desember</option>
+              @foreach($bulan as $bl)
+              <option>{{$bl->bulan}}</option>
+              @endforeach
             </select>
           </div>
           <div class="form-group">
             <label for="year" class="col-form-label px-0 align-self-end">Tahun</label>
             <select style="font-size: 12px;" id="year" name="tahun" class="form-control">
-              @for($i=2000; $i<2030 ; $i++) <option {{ $tahun == $i ? 'selected' : '' }}>{{$i}}</option>
-                @endfor
+              @foreach($tahun as $th)
+              <option>{{$th->tahun}}</option>
+              @endforeach
             </select>
           </div>
           <div class="form-group d-flex justify-content-center align-items-center">
@@ -52,6 +45,7 @@
         </div>
       </form>
     </div>
+    <!-- Fitur Filter End -->
     <div class="content-header row">
       <div class="dropshow">
         <p>Tampilkan</p>
@@ -67,7 +61,6 @@
       </div>
       <div class="action">
         <a href="" class="btn btn-action btn-add"><i class="fas fa-print"></i> Cetak Slip Gaji</a>
-        <a href=""><i class="fas fa-trash-alt"></i></a>
       </div>
     </div>
 
@@ -108,7 +101,7 @@
 
             <th class="center" scope="row">{{$i}}</th>
             <td class="center"><a href=""><input type="checkbox" aria-label="Checkbox for following text input"></a></td>
-            <td class="center"><a href=""><i class="fas fa-pen-square"></i></a></td>
+            <td class="center"><a href="{{route('absensis.edit', [$g->id] )}}"><i class="fas fa-pen-square"></i></a></td>
             <td class="center">{{$g->nik}}</td>
             <td class="center">{{$g->name}}</td>
             <td class="center">{{$g->bulan}}</td>
@@ -136,14 +129,10 @@
     </div>
 
     <div class="content-footer">
-      <p>Menampilkan <strong>1</strong> sampai <strong>2</strong> dari <strong>2</strong> data</p>
+      <p>Menampilkan <strong>{{$jml}}</strong> data</p>
       <nav aria-label="Page navigation example">
         <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          {{$gaji->appends(Request::all())->links()}}
         </ul>
       </nav>
     </div>
