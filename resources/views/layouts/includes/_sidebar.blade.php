@@ -13,7 +13,7 @@
       <li><a class="sidebar-item {{ (request()->is('absensis')) || (request()->is('absensis/create')) || (request()->is('absensis/{$absensis->id}/edit')) ? 'active' : '' }}" href="{{url('/absensis')}}"><i class="fas fa-user-clock"></i> Absensi</a></li>
 
       <li><a class="sidebar-item {{ (request()->is('gajis')) || (request()->is('gajis/create')) || (request()->is('gajis/{$gajis->id}/edit')) ? 'active' : '' }}" href="{{url('/gajis')}}"><i class="fas fa-wallet" aria-hidden="true"></i> Gajian</a></li>
-      <li><a class="sidebar-item" href="laporan.html"><i class="fas fa-chart-pie"></i> Laporan</a></li>
+      <li><a class="sidebar-item {{ (request()->is('laporans')) || (request()->is('laporans/create')) || (request()->is('laporans/{$laporans->id}/edit')) ? 'active' : '' }}" href="{{url('/laporans')}}"><i class="fas fa-chart-pie"></i> Laporan</a></li>
       <!-- Main Menu End -->
 
       <!-- Setting Menu Start -->
