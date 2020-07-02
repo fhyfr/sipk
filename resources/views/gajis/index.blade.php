@@ -60,7 +60,7 @@
         <p>Data</p>
       </div>
       <div class="action">
-        <a href="" class="btn btn-action btn-add"><i class="fas fa-print"></i> Cetak Slip Gaji</a>
+        <a href="{{url('/cetak/slip')}}" class="btn btn-action btn-add"><i class="fas fa-print"></i> Cetak Slip Gaji</a>
       </div>
     </div>
 

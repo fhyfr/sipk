@@ -35,7 +35,6 @@ Route::delete('usersDeleteAll', 'UserController@deleteAll');
 //Routes menu data karyawan
 Route::resource("karyawans", "KaryawanController");
 Route::delete('karyawansDeleteAll', 'KaryawanController@deleteAll');
-Route::get('/karyawan/pdf', 'KaryawanController@pdf');
 
 // Routes menu data absensi
 Route::resource("absensis", "AbsensiController");
@@ -53,3 +52,7 @@ Route::resource("gajis", "GajiController");
 
 // Routes menu Laporan
 Route::resource("laporans", "LaporanController");
+
+// Routes print slip dan laporan
+Route::get('/cetak/slip/{nama}/{bulan}/{tahun}', 'CetakController@slip_pdf');
+Route::get('/cetak/laporan/{bulan}/{tahun}', 'CetakController@laporan_pdf');

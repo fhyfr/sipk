@@ -11,9 +11,10 @@
     </a>
   </div>
   <div class="data-content">
+    @foreach($gaji as $g)
     <div class="content-header row">
-      <h2>Detail Gaji <em>{{$gaji->name}}</em></h2>
-      <a href="{{url('karyawan/pdf')}}" target="_blank" class="btn btn-action btn-print"><i class="fas fa-print"></i> Cetak Slip Gaji</a>
+      <h2>Detail Gaji <em>{{$g->name}}</em></h2>
+      <a href="{{url('/cetak/slip', ['id'=>$g->name, 'bulan'=>$g->bulan, 'tahun'=>$g->tahun])}}" target="_blank" class="btn btn-action btn-print"><i class="fas fa-print"></i> Cetak Slip Gaji</a>
     </div>
     <div class="slip-gaji">
       <div class="header">
@@ -30,10 +31,10 @@
               <h3>Jabatan</h3>
             </div>
             <div class="value">
-              <p>: <span>{{$slip}}-{{$gaji->tahun}}</span></p>
-              <p>: <span>{{$gaji->nik}}</span></p>
-              <p>: <span>{{$gaji->name}}</span></p>
-              <p>: <span>{{$gaji->jabatan}}</span></p>
+              <p>: <span>{{$slip}}-{{$g->tahun}}</span></p>
+              <p>: <span>{{$g->nik}}</span></p>
+              <p>: <span>{{$g->name}}</span></p>
+              <p>: <span>{{$g->jabatan}}</span></p>
             </div>
           </div>
           <div class="right">
@@ -44,8 +45,8 @@
             </div>
             <div class="value">
               <p>: <span>{{$tanggal}}</span></p>
-              <p>: <span>{{$gaji->bulan}}</span></p>
-              <p>: <span>{{$gaji->tahun}}</span></p>
+              <p>: <span>{{$g->bulan}}</span></p>
+              <p>: <span>{{$g->tahun}}</span></p>
             </div>
           </div>
         </div>
@@ -59,7 +60,7 @@
                   <th scope="row">1</th>
                   <td>Gaji Pokok</td>
                   <td>=</td>
-                  <td>Rp {{number_format($gaji->gaji_pokok, 0)}}</td>
+                  <td>Rp {{number_format($g->gaji_pokok, 0)}}</td>
                 </tr>
                 <tr>
                   <th scope="row">2</th>
@@ -71,20 +72,20 @@
                   <th scope="row">3</th>
                   <td>Uang Makan</td>
                   <td>=</td>
-                  <td>Rp {{number_format(($pendapatan->nm_makan*$gaji->jml_hadir), 0)}}</td>
+                  <td>Rp {{number_format(($pendapatan->nm_makan*$g->jml_hadir), 0)}}</td>
                 </tr>
                 <tr>
                   <th scope="row">4</th>
                   <td>Uang Lembur</td>
                   <td>=</td>
-                  <td>Rp {{number_format(($pendapatan->nm_lembur*$gaji->jml_lembur), 0)}}</td>
+                  <td>Rp {{number_format(($pendapatan->nm_lembur*$g->jml_lembur), 0)}}</td>
                 </tr>
                 <tr>
 
                   <!-- Jika jumlah alfa,sakit, dan izin sama dengan nol maka akan dapat insentif -->
                   <?php
-                  if (($gaji->jml_alfa && $gaji->jml_sakit && $gaji->jml_izin) == 0) {
-                    $insentif = $pendapatan->nm_makan * $gaji->jml_hadir;
+                  if (($g->jml_alfa && $g->jml_sakit && $g->jml_izin) == 0) {
+                    $insentif = $pendapatan->nm_makan * $g->jml_hadir;
                   } else {
                     $insentif = 0;
                   };
@@ -100,10 +101,10 @@
                   <th scope="row">6</th>
                   <td>Total Pendapatan</td>
                   <td>=</td>
-                  <td>Rp {{number_format(($gaji->gaji_pokok +
+                  <td>Rp {{number_format(($g->gaji_pokok +
                     $pendapatan->nm_tunjangan +
-                    ($pendapatan->nm_makan*$gaji->jml_hadir) +
-                    ($gaji->jml_lembur*$pendapatan->nm_lembur) + $insentif
+                    ($pendapatan->nm_makan*$g->jml_hadir) +
+                    ($g->jml_lembur*$pendapatan->nm_lembur) + $insentif
                     ), 0)}}</td>
                 </tr>
               </tbody>
@@ -117,25 +118,25 @@
                   <th scope="row">1</th>
                   <td>Alfa</td>
                   <td>=</td>
-                  <td>- Rp {{number_format($gaji->jml_alfa*$potongan->nm_alfa)}}</td>
+                  <td>- Rp {{number_format($g->jml_alfa*$potongan->nm_alfa)}}</td>
                 </tr>
                 <tr>
                   <th scope="row">2</th>
                   <td>Izin</td>
                   <td>=</td>
-                  <td>- Rp {{number_format($gaji->jml_izin*$potongan->nm_izin)}}</td>
+                  <td>- Rp {{number_format($g->jml_izin*$potongan->nm_izin)}}</td>
                 </tr>
                 <tr>
                   <th scope="row">3</th>
                   <td>Sakit</td>
                   <td>=</td>
-                  <td>- Rp {{number_format($gaji->jml_sakit*$potongan->nm_sakit)}}</td>
+                  <td>- Rp {{number_format($g->jml_sakit*$potongan->nm_sakit)}}</td>
                 </tr>
                 <tr style="font-weight: 800;">
                   <th scope="row">4</th>
                   <td>Total Potongan</td>
                   <td>=</td>
-                  <td>- Rp {{number_format(($gaji->jml_alfa*$potongan->nm_alfa)+($gaji->jml_izin*$potongan->nm_izin)+($gaji->jml_sakit*$potongan->nm_sakit) ,0)}}</td>
+                  <td>- Rp {{number_format(($g->jml_alfa*$potongan->nm_alfa)+($g->jml_izin*$potongan->nm_izin)+($g->jml_sakit*$potongan->nm_sakit) ,0)}}</td>
                 </tr>
               </tbody>
             </table>
@@ -145,14 +146,14 @@
           <h3>Total yang dibayarkan <strong>Rp {{number_format
               (
               (
-                ($gaji->gaji_pokok + 
+                ($g->gaji_pokok + 
                 $pendapatan->nm_tunjangan + 
-                ($pendapatan->nm_makan*$gaji->jml_hadir) +
-                ($gaji->jml_lembur*$pendapatan->nm_lembur) + $insentif
+                ($pendapatan->nm_makan*$g->jml_hadir) +
+                ($g->jml_lembur*$pendapatan->nm_lembur) + $insentif
               ) 
               - 
               (
-                ($gaji->jml_alfa*$potongan->nm_alfa)+($gaji->jml_izin*$potongan->nm_izin)+($gaji->jml_sakit*$potongan->nm_sakit)
+                ($g->jml_alfa*$potongan->nm_alfa)+($g->jml_izin*$potongan->nm_izin)+($g->jml_sakit*$potongan->nm_sakit)
               )
               ), 0)
             }}</strong></h3>
@@ -162,6 +163,7 @@
         </div>
       </div>
     </div>
+    @endforeach
   </div>
 </div>
 <!-- Content End -->

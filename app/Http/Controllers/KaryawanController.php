@@ -140,17 +140,4 @@ class KaryawanController extends Controller
         \DB::table("karyawans")->whereIn('id', explode(",", $ids))->delete();
         return response()->json(['success' => "Karyawan berhasil dihapus."]);
     }
-
-    // fungsi print PDF
-    public function pdf()
-    {
-        $jabatan = \App\Jabatan::all();
-
-        set_time_limit(300);
-
-        // fungsi cetak pdf
-        $pdf = PDF::loadview('print.slip')->setPaper('a4', 'landscape');;
-
-        return $pdf->stream();
-    }
 }

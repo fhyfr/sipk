@@ -47,7 +47,7 @@ class GajiController extends Controller
                 ->where('absensis.name', 'LIKE', '%' . $filterKeyword . '%')
                 ->where('absensis.bulan', 'LIKE', '%' . $b . '%')
                 ->where('absensis.tahun', 'LIKE', '%' . $t . '%')
-                ->paginate(20);
+                ->get();
         }
 
         return view('gajis.index', ['gaji' => $gaji, 'bulan' => $bulan, 'tahun' => $tahun, 'potongan' => $potongan, 'pendapatan' => $pendapatan]);
@@ -86,7 +86,7 @@ class GajiController extends Controller
             ->join('absensis', 'karyawans.name', '=', 'absensis.name')
             ->join('jabatans', 'karyawans.jabatan', '=', 'jabatans.jabatan')
             ->where('absensis.id', $id)
-            ->first();
+            ->get();
         $perusahaan = \App\Perusahaan::first();
 
         // Set lokasi timezone ke indonesia (ID)
