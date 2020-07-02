@@ -59,9 +59,11 @@
         </form>
         <p>Data</p>
       </div>
+      @if(auth()->user()->roles == 'admin')
       <div class="action">
         <a href="{{url('/cetak/slip/all')}}" target="_blank" class="btn btn-action btn-add"><i class="fas fa-print"></i> Cetak Semua</a>
       </div>
+      @endif
     </div>
 
     <div class="table-responsive-md">
@@ -69,7 +71,9 @@
         <thead>
           <tr>
             <th class="center" scope="col">No</th>
+            @if(auth()->user()->roles == 'admin')
             <th class="center" scope="col"><i class="fas fa-pen-square"></i></th>
+            @endif
             <th class="center" scope="col">NIK</th>
             <th class="center" scope="col">Nama Karyawan</th>
             <th class="center" scope="col">Bulan</th>
@@ -99,7 +103,9 @@
             ?>
 
             <th class="center" scope="row">{{$i}}</th>
+            @if(auth()->user()->roles == 'admin')
             <td class=" center"><a href="{{route('absensis.edit', [$g->id] )}}"><i class="fas fa-pen-square"></i></a></td>
+            @endif
             <td class="center">{{$g->nik}}</td>
             <td class="center">{{$g->name}}</td>
             <td class="center">{{$g->bulan}}</td>

@@ -62,8 +62,10 @@
         <p>Data</p>
       </div>
       <div class="action">
+        @if(auth()->user()->roles == 'admin')
         <a href="{{route('absensis.create')}}" class="btn btn-action btn-add"><i class="fas fa-plus-circle"></i> <span>Tambah Data</span></a>
         <a class="btn delete_all" data-url="{{ url('absensisDeleteAll') }}"> <i class="fas fa-trash-alt"></i></a>
+        @endif
       </div>
     </div>
 
@@ -72,8 +74,10 @@
         <thead>
           <tr>
             <th class="center" scope="col">No</th>
+            @if(auth()->user()->roles == 'admin')
             <th class="center" scope="col"><input type="checkbox" id="master"></th>
             <th class="center" scope="col"><i class="fas fa-pen-square"></i></th>
+            @endif
             <th class="center" scope="col">Nama Karyawan</th>
             <th class="center" scope="col">Bulan</th>
             <th class="center" scope="col">Tahun</th>
@@ -95,8 +99,10 @@
           ?>
           <tr>
             <th class="center" scope="row">{{$i}}</th>
+            @if(auth()->user()->roles == 'admin')
             <td class="center"><input type="checkbox" class="sub_chk" data-id="{{$absen->id}}"></a></td>
             <td class="center"><a href="{{route('absensis.edit', [$absen->id] )}}"><i class="fas fa-pen-square"></i></a></td>
+            @endif
             <td class="center">{{$absen->name}}</td>
             <td class="center">{{$absen->bulan}}</td>
             <td class="center">{{$absen->tahun}}</td>

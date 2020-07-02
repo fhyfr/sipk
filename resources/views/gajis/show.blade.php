@@ -14,7 +14,9 @@
     @foreach($gaji as $g)
     <div class="content-header row">
       <h2>Detail Gaji <em>{{$g->name}}</em></h2>
+      @if(auth()->user()->roles == 'admin')
       <a href="{{url('/cetak/slip', ['id'=>$g->name, 'bulan'=>$g->bulan, 'tahun'=>$g->tahun])}}" target="_blank" class="btn btn-action btn-print"><i class="fas fa-print"></i> Cetak Slip Gaji</a>
+      @endif
     </div>
     <div class="slip-gaji">
       <div class="header">
