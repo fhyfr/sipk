@@ -13,14 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', 'HomeController@index')->name('homepage');
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-// routes untuk Auth (Login, register, lupa password)
-Auth::routes();
 
 // Hindari User agar tidak bisa masuk ke fitur registrasi
 Route::match(["GET", "POST"], "/register", function () {
@@ -57,3 +52,6 @@ Route::resource("laporans", "LaporanController");
 Route::get('/cetak/slip/{nama}/{bulan}/{tahun}', 'CetakController@slip_pdf');
 Route::get('/cetak/laporan/{bulan}/{tahun}', 'CetakController@laporan_pdf');
 Route::get('/cetak/slip/all', 'CetakController@cetak_semua');
+
+// routes untuk Auth (Login, register, lupa password)
+Auth::routes();
