@@ -16,7 +16,7 @@
       <h2>Edit Gaji Pokok <strong>{{$jabatan->jabatan}}</strong></h2>
     </div>
 
-    <form class="add-data absensi" action="{{route('penggajians.update', [$jabatan->id])}}" method="post">
+    <form class="add-data absensi" action="{{url('penggajian/update', [$jabatan->id])}}" method="post">
       @csrf
       <div class="form-group">
         <!-- Input berupa hidden untuk mengganti method menjadi PUT -->

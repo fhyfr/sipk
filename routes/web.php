@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Routes menu data penggajian
     Route::resource("penggajians", "PenggajianController");
+    Route::match(['put', 'patch'], '/penggajian/update/{id}', 'PenggajianController@perbarui');
     Route::delete('penggajiansDeleteAll', 'PenggajianController@deleteAll');
 
     // Routes menu data penggajian

@@ -59,14 +59,14 @@
               ?>
               @foreach($gaji as $g)
               <!-- Jika jumlah alfa,sakit, dan izin sama dengan nol maka akan dapat insentif -->
+              @if ($g->jml_alfa==0 and $g->jml_sakit==0 and $g->jml_izin==0)
+              <?php $insentif = $g->insentif; ?>
+              @else
+              <?php $insentif = 0; ?>
+              @endif
+
               <?php
               $i++;
-              if (($g->jml_alfa && $g->jml_sakit && $g->jml_izin) == 0) {
-                $insentif = $pendapatan->nm_makan * $g->jml_hadir;
-              } else {
-                $insentif = 0;
-              };
-
               $total = $total + (
                 ($g->gaji_pokok +
                   $pendapatan->nm_tunjangan +

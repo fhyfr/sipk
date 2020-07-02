@@ -120,7 +120,7 @@
           <div class="form-group row">
             <label for="uangMakan" class="col-sm-3 col-form-label">Uang Makan</label>
             <div class="col-sm-9">
-              <input type="number" class="form-control" id="uangMakan" name="makan" value="{{$pd->nm_lembur}}" required>
+              <input type="number" class="form-control" id="uangMakan" name="makan" value="{{$pd->nm_makan}}" required>
             </div>
           </div>
           <div class="form-group row">

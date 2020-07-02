@@ -4,7 +4,7 @@
     <ul id="sidebar-menu" class="sidebar-menu">
       <!-- Main Menu Sart -->
       <li class="sidebar-header">MENU UTAMA</li>
-      <li><a class="sidebar-item {{ (request()->is('/home')) || (request()->is('/')) ? 'active' : '' }}" href="{{url('/home')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+      <li><a class="sidebar-item {{ (request()->is('/home'))|| (request()->is('home')) || (request()->is('/')) ? 'active' : '' }}" href="{{url('/home')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
 
       <!-- Sidebar Menu Admin -->
       @if(auth()->user()->roles == 'admin')

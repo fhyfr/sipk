@@ -142,13 +142,12 @@
               </tr>
               <tr>
                 <!-- Jika jumlah alfa,sakit, dan izin sama dengan nol maka akan dapat insentif -->
-                <?php
-                if (($g->jml_alfa && $g->jml_sakit && $g->jml_izin) == 0) {
-                  $insentif = $pendapatan->nm_makan * $g->jml_hadir;
-                } else {
-                  $insentif = 0;
-                };
-                ?>
+                <!-- Jika jumlah alfa,sakit, dan izin sama dengan nol maka akan dapat insentif -->
+                @if ($g->jml_alfa==0 and $g->jml_sakit==0 and $g->jml_izin==0)
+                <?php $insentif = $g->insentif; ?>
+                @else
+                <?php $insentif = 0; ?>
+                @endif
                 <th scope="row">5</th>
                 <td>Insentif</td>
                 <td>=</td>

@@ -88,21 +88,11 @@ class PenggajianController extends Controller
     public function update(Request $request, $id)
     {
         // Update data gaji pokok ke database
-        $jabatan = \App\Jabatan::findOrFail($id);
+
         $potongan = \App\Potongan::findOrFail($id);
         $pendapatan = \App\Pendapatan::findOrFail($id);
 
-        if ($request->get('jabatan')) {
-
-            $jabatan->jabatan = $request->get('jabatan');
-            $jabatan->gaji_pokok = $request->get('gaji_pokok');
-            $jabatan->insentif = $request->get('insentif');
-
-            $jabatan->save();
-            return redirect()->route('penggajians.index', [$id])->with('status', 'Data Golongan dan Gaji Pokok berhasil diupdated');
-        }
-
-        if ($request->get('alfa')) {
+        if ($request->get('alfa') || $request->get('izin') || $request->get('sakit')) {
             $potongan->nm_alfa = $request->get('alfa');
             $potongan->nm_izin = $request->get('izin');
             $potongan->nm_sakit = $request->get('sakit');
@@ -112,7 +102,8 @@ class PenggajianController extends Controller
             return redirect()->route('penggajians.index', [$id])->with('status', 'Data Pengurangan Gaji berhasil diupdated');
         }
 
-        if ($request->get('lembur')) {
+        if ($request->get('lembur') || $request->get('makan') || $request->get('tunjangan')) {
+
             $pendapatan->nm_lembur = $request->get('lembur');
             $pendapatan->nm_makan = $request->get('makan');
             $pendapatan->nm_tunjangan = $request->get('tunjangan');
@@ -145,5 +136,17 @@ class PenggajianController extends Controller
         $ids = $request->ids;
         \DB::table("jabatans")->whereIn('id', explode(",", $ids))->delete();
         return response()->json(['success' => "Data Golongan Deleted successfully."]);
+    }
+
+    public function perbarui(Request $request, $id)
+    {
+        $jabatan = \App\Jabatan::findOrFail($id);
+
+        $jabatan->jabatan = $request->get('jabatan');
+        $jabatan->gaji_pokok = $request->get('gaji_pokok');
+        $jabatan->insentif = $request->get('insentif');
+
+        $jabatan->save();
+        return redirect()->route('penggajians.index', [$id])->with('status', 'Data Golongan dan Gaji Pokok berhasil diupdated');
     }
 }

@@ -47,7 +47,7 @@ class GajiController extends Controller
                 ->where('absensis.name', 'LIKE', '%' . $filterKeyword . '%')
                 ->where('absensis.bulan', 'LIKE', '%' . $b . '%')
                 ->where('absensis.tahun', 'LIKE', '%' . $t . '%')
-                ->get();
+                ->paginate(20);
         }
 
         return view('gajis.index', ['gaji' => $gaji, 'bulan' => $bulan, 'tahun' => $tahun, 'potongan' => $potongan, 'pendapatan' => $pendapatan]);
