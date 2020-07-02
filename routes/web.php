@@ -56,3 +56,4 @@ Route::resource("laporans", "LaporanController");
 // Routes print slip dan laporan
 Route::get('/cetak/slip/{nama}/{bulan}/{tahun}', 'CetakController@slip_pdf');
 Route::get('/cetak/laporan/{bulan}/{tahun}', 'CetakController@laporan_pdf');
+Route::get('/cetak/slip/all', 'CetakController@cetak_semua');

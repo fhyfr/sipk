@@ -60,7 +60,7 @@
         <p>Data</p>
       </div>
       <div class="action">
-        <a href="{{url('/cetak/slip')}}" class="btn btn-action btn-add"><i class="fas fa-print"></i> Cetak Slip Gaji</a>
+        <a href="{{url('/cetak/slip/all')}}" target="_blank" class="btn btn-action btn-add"><i class="fas fa-print"></i> Cetak Semua</a>
       </div>
     </div>
 
@@ -69,7 +69,6 @@
         <thead>
           <tr>
             <th class="center" scope="col">No</th>
-            <th class="center" scope="col"><input type="checkbox" aria-label="Checkbox for following text input"></th>
             <th class="center" scope="col"><i class="fas fa-pen-square"></i></th>
             <th class="center" scope="col">NIK</th>
             <th class="center" scope="col">Nama Karyawan</th>
@@ -100,8 +99,7 @@
             ?>
 
             <th class="center" scope="row">{{$i}}</th>
-            <td class="center"><a href=""><input type="checkbox" aria-label="Checkbox for following text input"></a></td>
-            <td class="center"><a href="{{route('absensis.edit', [$g->id] )}}"><i class="fas fa-pen-square"></i></a></td>
+            <td class=" center"><a href="{{route('absensis.edit', [$g->id] )}}"><i class="fas fa-pen-square"></i></a></td>
             <td class="center">{{$g->nik}}</td>
             <td class="center">{{$g->name}}</td>
             <td class="center">{{$g->bulan}}</td>

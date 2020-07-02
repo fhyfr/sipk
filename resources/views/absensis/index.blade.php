@@ -95,7 +95,7 @@
           ?>
           <tr>
             <th class="center" scope="row">{{$i}}</th>
-            <td class="center"><a href=""><input type="checkbox" class="sub_chk" data-id="{{$absen->id}}"></a></td>
+            <td class="center"><input type="checkbox" class="sub_chk" data-id="{{$absen->id}}"></a></td>
             <td class="center"><a href="{{route('absensis.edit', [$absen->id] )}}"><i class="fas fa-pen-square"></i></a></td>
             <td class="center">{{$absen->name}}</td>
             <td class="center">{{$absen->bulan}}</td>

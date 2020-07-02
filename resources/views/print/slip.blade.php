@@ -220,6 +220,8 @@
         <p>{{$perusahaan->nama_pimpinan}}</p>
       </div>
     </div>
+    <hr>
+    <br>
     @endforeach
   </div>
 </body>
