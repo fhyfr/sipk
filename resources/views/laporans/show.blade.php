@@ -49,7 +49,16 @@
                 <th class="center" scope="col">No</th>
                 <th class="center" scope="col">NIK</th>
                 <th class="center" scope="col">Nama Karyawan</th>
-                <th class="center" scope="col">Total Gaji</th>
+                <th class="center" scope="col">Jabatan</th>
+                <th class="center" scope="col">Gaji Pokok</th>
+                <th class="center" scope="col">Tunjangan</th>
+                <th class="center" scope="col">Uang Makan</th>
+                <th class="center" scope="col">Lembur</th>
+                <th class="center" scope="col">Insentif</th>
+                <th class="center" scope="col">Alfa</th>
+                <th class="center" scope="col">Izin</th>
+                <th class="center" scope="col">Sakit</th>
+                <th class="center" scope="col">Gaji Bersih</th>
               </tr>
             </thead>
             <tbody>
@@ -79,7 +88,26 @@
               <tr>
                 <th class="center" scope="row">{{$i}}</th>
                 <td class="center">{{$g->nik}}</td>
-                <td class="center">{{$g->name}}</td>
+                <td class="left">{{$g->name}}</td>
+                <td class="left">{{$g->jabatan}}</td>
+                <td class="center">Rp {{number_format($g->gaji_pokok, 0)}}</td>
+                <td class="center">Rp {{number_format($pendapatan->nm_tunjangan, 0)}}</td>
+                <td class="center">Rp {{number_format(($pendapatan->nm_makan*$g->jml_hadir), 0)}}</td>
+                <td class="center">Rp {{number_format(($pendapatan->nm_lembur*$g->jml_lembur), 0)}}</td>
+                <td class="center">
+                  <!-- Jika jumlah alfa,sakit, dan izin sama dengan nol maka akan dapat insentif -->
+                  @if ($g->jml_alfa==0 and $g->jml_sakit==0 and $g->jml_izin==0)
+                  <?php $insentif = $g->insentif; ?>
+                  @else
+                  <?php $insentif = 0; ?>
+                  @endif
+
+                  Rp {{number_format($insentif)}}
+                </td>
+                <td class="center">- Rp {{number_format($g->jml_alfa*$potongan->nm_alfa)}}</td>
+                <td class="center">- Rp {{number_format($g->jml_izin*$potongan->nm_izin)}}</td>
+                <td class="center">- Rp {{number_format($g->jml_sakit*$potongan->nm_sakit)}}</td>
+
                 <td class="center">Rp {{number_format
               (
               (
