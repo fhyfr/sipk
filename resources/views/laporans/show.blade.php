@@ -47,7 +47,6 @@
             <thead>
               <tr>
                 <th class="center" scope="col">No</th>
-                <th class="center" scope="col">NIK</th>
                 <th class="center" scope="col">Nama Karyawan</th>
                 <th class="center" scope="col">Jabatan</th>
                 <th class="center" scope="col">Gaji Pokok</th>
@@ -55,9 +54,7 @@
                 <th class="center" scope="col">Uang Makan</th>
                 <th class="center" scope="col">Lembur</th>
                 <th class="center" scope="col">Insentif</th>
-                <th class="center" scope="col">Alfa</th>
-                <th class="center" scope="col">Izin</th>
-                <th class="center" scope="col">Sakit</th>
+                <th class="center" scope="col">Potongan</th>
                 <th class="center" scope="col">Gaji Bersih</th>
               </tr>
             </thead>
@@ -87,7 +84,6 @@
               ?>
               <tr>
                 <th class="center" scope="row">{{$i}}</th>
-                <td class="center">{{$g->nik}}</td>
                 <td class="left">{{$g->name}}</td>
                 <td class="left">{{$g->jabatan}}</td>
                 <td class="center">Rp {{number_format($g->gaji_pokok, 0)}}</td>
@@ -104,10 +100,7 @@
 
                   Rp {{number_format($insentif)}}
                 </td>
-                <td class="center">- Rp {{number_format($g->jml_alfa*$potongan->nm_alfa)}}</td>
-                <td class="center">- Rp {{number_format($g->jml_izin*$potongan->nm_izin)}}</td>
-                <td class="center">- Rp {{number_format($g->jml_sakit*$potongan->nm_sakit)}}</td>
-
+                <td class="center">- Rp {{number_format(($g->jml_alfa*$potongan->nm_alfa)+($g->jml_izin*$potongan->nm_izin)+($g->jml_sakit*$potongan->nm_sakit) ,0)}}</td>
                 <td class="center">Rp {{number_format
               (
               (

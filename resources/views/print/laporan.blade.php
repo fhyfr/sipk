@@ -112,9 +112,15 @@
           <thead>
             <tr>
               <th class="number-column">No</th>
-              <th>NIK</th>
-              <th>Nama Karyawan</th>
-              <th>Total Gaji</th>
+              <th class="center" scope="col">Nama Karyawan</th>
+              <th class="center" scope="col">Jabatan</th>
+              <th class="center" scope="col">Gaji Pokok</th>
+              <th class="center" scope="col">Tunjangan</th>
+              <th class="center" scope="col">Uang Makan</th>
+              <th class="center" scope="col">Lembur</th>
+              <th class="center" scope="col">Insentif</th>
+              <th class="center" scope="col">Potongan</th>
+              <th class="center" scope="col">Gaji Bersih</th>
             </tr>
           </thead>
           <tbody>
@@ -143,8 +149,24 @@
             ?>
             <tr>
               <th class="number-column">{{$i}}</th>
-              <td class="left">{{$g->nik}}</td>
               <td class="left">{{$g->name}}</td>
+              <td class="left">{{$g->jabatan}}</td>
+              <td class="left">Rp{{number_format($g->gaji_pokok, 0)}}</td>
+              <td class="left">Rp{{number_format($pendapatan->nm_tunjangan, 0)}}</td>
+              <td class="left">Rp{{number_format(($pendapatan->nm_makan*$g->jml_hadir), 0)}}</td>
+              <td class="left">Rp{{number_format(($pendapatan->nm_lembur*$g->jml_lembur), 0)}}</td>
+              <td class="left">
+                <!-- Jika jumlah alfa,sakit, dan izin sama dengan nol maka akan dapat insentif -->
+                @if ($g->jml_alfa==0 and $g->jml_sakit==0 and $g->jml_izin==0)
+                <?php $insentif = $g->insentif; ?>
+                @else
+                <?php $insentif = 0; ?>
+                @endif
+
+                Rp{{number_format($insentif)}}
+              </td>
+              <td class="left">-Rp{{number_format(($g->jml_alfa*$potongan->nm_alfa)+($g->jml_izin*$potongan->nm_izin)+($g->jml_sakit*$potongan->nm_sakit) ,0)}}</td>
+
               <td class="left">Rp{{number_format
               (
               (
