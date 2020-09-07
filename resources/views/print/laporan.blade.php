@@ -15,6 +15,18 @@
     box-sizing: border-box;
   }
 
+  p {
+    font-size: 10px;
+  }
+
+  th {
+    font-size: 40px;
+  }
+
+  td {
+    font-size: 35px;
+  }
+
   body {
     background-color: blac;
     display: flex;
@@ -93,16 +105,16 @@
 <body>
   <div class="slip-gaji">
     <div class="header" style="text-align: center;">
-      <h3>Laporan Pengeluaran Keuangan</h3>
-      <h3 class="brand-name">{{$perusahaan->nama_perusahaan}}</h3>
+      <h5>Laporan Pengeluaran Keuangan</h5>
+      <h6 class="brand-name">{{$perusahaan->nama_perusahaan}}</h6>
     </div>
     <div class="content-body">
       <div class="data-karyawan" style="text-align:start;">
         <div class="left">
           <div class="label">
-            <h4>Bulan : {{$bulan}}</h4>
-            <h4>Tahun : {{$tahun}}</h4>
-            <h4>Tanggal Cetak : {{$tanggal}}</h4>
+            <h5>Bulan : {{$bulan}}</h5>
+            <h5>Tahun : {{$tahun}}</h5>
+            <h5>Tanggal Cetak : {{$tanggal}}</h5>
           </div>
         </div>
       </div>
@@ -148,7 +160,7 @@
                 ($g->jml_alfa * $potongan->nm_alfa) + ($g->jml_izin * $potongan->nm_izin) + ($g->jml_sakit * $potongan->nm_sakit)))
             ?>
             <tr>
-              <th class="number-column">{{$i}}</th>
+              <td class="number-column">{{$i}}</td>
               <td class="left">{{$g->name}}</td>
               <td class="left">{{$g->jabatan}}</td>
               <td class="left">Rp{{number_format($g->gaji_pokok, 0)}}</td>
@@ -188,9 +200,9 @@
       </div>
 
       <div class="total-fee" style="text-align: center;">
-        <h3>Total yang dibayarkan <strong>Rp{{number_format($total, 0)}}</strong></h3>
+        <h6>Total yang dibayarkan Rp{{number_format($total, 0)}}</h6>
         <p><em>Mengetahui,</em></p>
-        <h3 class="owner">Pimpinan Perusahaan</h3>
+        <h6 class="owner">Pimpinan Perusahaan</h6>
         <p>{{$perusahaan->nama_pimpinan}}</p>
       </div>
     </div>
